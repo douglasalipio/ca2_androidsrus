@@ -36,29 +36,29 @@ public class Scrap {
     }
 
     public String generateArms() {
-        String visions[] = {"Heat vision", "Full colour", "Night vision"};
-        int mobilityIndex = random.nextInt(visions.length);
-        return visions[mobilityIndex];
+        String arms[] = {"Heat vision", "Full colour", "Night vision"};
+        int armsIndex = random.nextInt(arms.length);
+        return arms[armsIndex];
     }
 
     public String generateMediaCenter() {
-        String visions[] = {"Sony", "JVC", "Meridian"};
-        int mobilityIndex = random.nextInt(visions.length);
-        return visions[mobilityIndex];
+        String mediaCenters[] = {"Sony", "JVC", "Meridian"};
+        int mediaCentersIndex = random.nextInt(mediaCenters.length);
+        return mediaCenters[mediaCentersIndex];
     }
 
     public String generatePowerPlant() {
-        String visions[] = {"Lithium", "Hydrogen", "Plasma"};
-        int mobilityIndex = random.nextInt(visions.length);
-        return visions[mobilityIndex];
+        String powerPlants[] = {"Lithium", "Hydrogen", "Plasma"};
+        int powerPlantsIndex = random.nextInt(powerPlants.length);
+        return powerPlants[powerPlantsIndex];
     }
 
     public String generateModel() {
         String models[] = {"Android mk1 ",
-            "Android mk1 ",
-            "Android mk1 ",
-            "Android mk1 ",
-            "Android mk1 "};
+            "Android mk2 ",
+            "Android mk3 ",
+            "Android mk4 ",
+            "Android mk5 "};
         int modelsIndex = random.nextInt(models.length);
         return models[modelsIndex];
     }
