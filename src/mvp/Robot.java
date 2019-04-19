@@ -5,6 +5,8 @@
  */
 package mvp;
 
+import java.util.Date;
+
 /**
  *
  * @author hal-9000
@@ -36,68 +38,73 @@ public class Robot {
         this.arms = arms;
         this.mediaCenter = mediaCenter;
         this.powerPlant = powerPlant;
-        this.serialNumber = System.currentTimeMillis();
+        this.serialNumber = System.nanoTime();
     }
 
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    public void setBrain(String brain) {
+    public void attachBrain(String brain) {
         this.brain = brain;
     }
 
-    public void setMobility(String mobility) {
+    public void attachMobility(String mobility) {
         this.mobility = mobility;
     }
 
-    public void setVision(String vision) {
+    public void attchVision(String vision) {
         this.vision = vision;
     }
 
-    public void setArms(String arms) {
+    public void attchArms(String arms) {
         this.arms = arms;
     }
 
-    public void setMediaCenter(String mediaCenter) {
+    public void attachMediaCenter(String mediaCenter) {
         this.mediaCenter = mediaCenter;
     }
 
-    public void setPowerPlant(String powerPlant) {
+    public void attachPowerPlant(String powerPlant) {
         this.powerPlant = powerPlant;
     }
 
-    public long getSerialNumber() {
+    public long attachSerialNumber() {
         return serialNumber;
     }
 
-    public String getModel() {
-        return model;
-    }
-
-    public String getBrain() {
+    public String donateBrain() {
         return brain;
     }
 
-    public String getMobility() {
+    public String doateMobility() {
         return mobility;
     }
 
-    public String getVision() {
+    public String donateVision() {
         return vision;
     }
 
-    public String getArms() {
+    public String donateArms() {
         return arms;
     }
 
-    public String getMediaCenter() {
+    public String donateMediaCenter() {
         return mediaCenter;
     }
 
-    public String getPowerPlant() {
+    public String donatePowerPlant() {
         return powerPlant;
     }
+
+    public void attachModel() {
+        this.model = model;
+    }
+
+    public String donateModel() {
+        return model;
+    }
+
+    public long getSerialNumber() {
+        return this.serialNumber;
+    }
+
 
     @Override
     public String toString() {

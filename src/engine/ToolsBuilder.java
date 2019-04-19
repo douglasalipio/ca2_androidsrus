@@ -68,7 +68,7 @@ public class ToolsBuilder {
      * @return
      */
     public String arms() {
-        String arms[] = {"Heat vision", "Full colour", "Night vision"};
+        String arms[] = {"Claws", "Grippers", "Articulated fingers"};
         int armsIndex = random.nextInt(arms.length);
         return arms[armsIndex];
     }
