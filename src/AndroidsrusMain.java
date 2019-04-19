@@ -4,19 +4,21 @@
  * and open the template in the editor.
  */
 
-
 import datastructure.RobotTree;
+import mvp.RobotUI;
 
 /**
  *
  * @author hal-9000
  */
 public class AndroidsrusMain {
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-       
+        RobotUI ui = new RobotUI();
+        ui.showMainMenu();
     }
 
 }

@@ -20,7 +20,7 @@ public class Robot {
     private String mediaCenter;
     private String powerPlant;
 
-    public Robot(long serialNumber,
+    public Robot(
             String model,
             String brain,
             String mobility,
@@ -29,7 +29,6 @@ public class Robot {
             String mediaCenter,
             String powerPlant) {
 
-        this.serialNumber = serialNumber;
         this.model = model;
         this.brain = brain;
         this.mobility = mobility;
@@ -37,6 +36,7 @@ public class Robot {
         this.arms = arms;
         this.mediaCenter = mediaCenter;
         this.powerPlant = powerPlant;
+        this.serialNumber = System.currentTimeMillis();
     }
 
     public void setModel(String model) {
@@ -97,6 +97,20 @@ public class Robot {
 
     public String getPowerPlant() {
         return powerPlant;
+    }
+
+    @Override
+    public String toString() {
+        return "------------ v1 Android Information --------------\n"
+                + "Model: " + model + "\n"
+                + "SerialNum: " + serialNumber + "\n"
+                + "Brain:" + brain + "\n"
+                + "Mobility:" + mobility + "\n"
+                + "Vision:" + vision + "\n"
+                + "Arms: " + arms + "\n"
+                + "Media Center:" + mediaCenter + "\n"
+                + "Power Plant:" + powerPlant + "\n"
+                + "--------------------------------------------------";
     }
 
 }

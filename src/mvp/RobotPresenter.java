@@ -5,6 +5,7 @@
  */
 package mvp;
 
+import engine.RobotBuilder;
 import mvp.Robot;
 import java.util.List;
 
@@ -12,10 +13,21 @@ import java.util.List;
  *
  * @author hal-9000
  */
-public class RobotPresenter {
+public class RobotPresenter implements RobotContract.BasePresenter {
 
-    public List<Robot> build() {
-        
-        return null;
+    private RobotBuilder robotBuilder = RobotBuilder.instance();
+    private RobotContract.BaseView view;
+
+    @Override
+    public void attach(RobotContract.BaseView view) {
+        this.view = view;
     }
+
+    @Override
+    public void generateFirstGeneration() {
+        if (view != null) {
+            view.showFirstGeneration(robotBuilder.v1Bunch());
+        }
+    }
+
 }
