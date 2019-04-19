@@ -3,7 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package androidsrus.douglas;
+package datastructure;
+
+import datastructure.Node;
+import datastructure.Node;
+import mvp.Robot;
+import mvp.Robot;
+import mvp.Robot;
 
 /**
  *
@@ -20,14 +26,14 @@ public class RobotTree {
      * @param value
      * @return
      */
-    private Node addRecursive(Node current, int value) {
+    public Node addRecursive(Node current, Robot value) {
         if (current == null) {
             return new Node(value);
         }
 
-        if (value < current.value) {
+        if (value.getSerialNumber() < current.value.getSerialNumber()) {
             current.left = addRecursive(current.left, value);
-        } else if (value > current.value) {
+        } else if (value.getSerialNumber() > current.value.getSerialNumber()) {
             current.right = addRecursive(current.right, value);
         } else {
             // value already exists
@@ -42,7 +48,7 @@ public class RobotTree {
      *
      * @param value
      */
-    public void add(int value) {
+    public void add(Robot value) {
         root = addRecursive(root, value);
     }
 
@@ -53,14 +59,14 @@ public class RobotTree {
      * @param value
      * @return
      */
-    private boolean containsNodeRecursive(Node current, int value) {
+    public boolean containsNodeRecursive(Node current, Robot value) {
         if (current == null) {
             return false;
         }
-        if (value == current.value) {
+        if (value.getSerialNumber() == current.value.getSerialNumber()) {
             return true;
         }
-        return value < current.value
+        return value.getSerialNumber() < current.value.getSerialNumber()
                 ? containsNodeRecursive(current.left, value)
                 : containsNodeRecursive(current.right, value);
     }
@@ -72,7 +78,8 @@ public class RobotTree {
      * @param value
      * @return
      */
-    public boolean containsNode(int value) {
+    public boolean containsNode(Robot value) {
         return containsNodeRecursive(root, value);
     }
+    
 }

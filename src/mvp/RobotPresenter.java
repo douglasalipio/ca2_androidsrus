@@ -3,22 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package androidsrus.douglas;
+package mvp;
+
+import mvp.Robot;
+import java.util.List;
 
 /**
  *
  * @author hal-9000
  */
-public class Node {
+public class RobotPresenter {
 
-    int value;
-    Node left;
-    Node right;
-
-    Node(int value) {
-        this.value = value;
-        this.right = null;
-        this.left = null;
+    public List<Robot> build() {
+        
+        return null;
     }
-
 }

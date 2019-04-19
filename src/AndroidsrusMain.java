@@ -3,12 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package androidsrus.douglas;
+
+
+import datastructure.RobotTree;
 
 /**
  *
  * @author hal-9000
  */
-public class DataSet {
-    
+public class AndroidsrusMain {
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+       
+    }
+
 }
