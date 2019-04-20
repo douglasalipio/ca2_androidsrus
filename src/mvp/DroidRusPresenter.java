@@ -14,13 +14,13 @@ import java.util.List;
  *
  * @author hal-9000
  */
-public class RobotPresenter implements RobotContract.BasePresenter {
+public class DroidRusPresenter implements DroidsRusContract.BasePresenter {
 
     private final RobotBuilder robotBuilder = RobotBuilder.instance();
-    private RobotContract.BaseView view;
+    private DroidsRusContract.BaseView view;
 
     @Override
-    public void attach(RobotContract.BaseView view) {
+    public void attach(DroidsRusContract.BaseView view) {
         this.view = view;
     }
 
@@ -47,8 +47,6 @@ public class RobotPresenter implements RobotContract.BasePresenter {
             robots.addAll(searchRobotByModel(model, robotBuilder.allV2Androids()));
             robots.addAll(searchRobotByModel(model, robotBuilder.allV1Androids()));
             view.showRobotsByModel(robots);
-        } else {
-            view.onErrorEmptylist();
         }
 
     }
@@ -84,8 +82,6 @@ public class RobotPresenter implements RobotContract.BasePresenter {
             totalCount += +searchTotalModelAvailable(model, robotBuilder.allV1Androids());
             totalCount += +searchTotalModelAvailable(model, robotBuilder.allV2Androids());
             view.showTotalCountsAvaliable("Total count for " + model + "is " + totalCount);
-        } else {
-            view.onErrorEmptylist();
         }
     }
 }

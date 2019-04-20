@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-import mvp.RobotUI;
+import mvp.DroidsRusUI;
 
 /**
  *
@@ -16,7 +16,7 @@ public class AndroidsrusMain {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        RobotUI ui = new RobotUI();
+        DroidsRusUI ui = new DroidsRusUI();
         ui.showMainMenu();
     }
 }

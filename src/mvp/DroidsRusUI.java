@@ -10,18 +10,26 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
+ * The App screen.
  *
  * @author hal-9000
  */
-public class RobotUI implements RobotContract.BaseView {
+public class DroidsRusUI implements DroidsRusContract.BaseView {
 
-    private RobotContract.BasePresenter presenter = new RobotPresenter();
+    private DroidsRusContract.BasePresenter presenter = new DroidRusPresenter();
     private final Scanner reader = new Scanner(System.in);
 
-    public RobotUI() {
+    /**
+     * Creating the APP UI.
+     *
+     */
+    public DroidsRusUI() {
         presenter.attach(this);
     }
 
+    /**
+     * Main Menu.
+     */
     public void showMainMenu() {
         System.out.println("**--DroidsRus App---------------------**");
         System.out.println("**------------------------------------**");
@@ -56,6 +64,9 @@ public class RobotUI implements RobotContract.BaseView {
 
     }
 
+    /**
+     * Ask for total counts of available types to make the search.
+     */
     private void menuTotalCounts() {
         Scanner reader = new Scanner(System.in);
         System.out.println("Eg.: how many Andy, how many Betty etc.");
@@ -64,6 +75,9 @@ public class RobotUI implements RobotContract.BaseView {
         presenter.findTotalTypes(type);
     }
 
+    /**
+     * Ask for model to make the search.
+     */
     private void menuSearchByType() {
         Scanner reader = new Scanner(System.in);
         System.out.println("Eg.: Andy, mk1, Fred etc.");
@@ -72,6 +86,9 @@ public class RobotUI implements RobotContract.BaseView {
         presenter.findRobotByModel(model);
     }
 
+    /**
+     * Back Menu.
+     */
     private void bottomMenu() {
         Scanner reader = new Scanner(System.in);
         System.out.println(" 1 - Back to menu");
@@ -82,6 +99,12 @@ public class RobotUI implements RobotContract.BaseView {
         }
     }
 
+    /**
+     * All available models of a particular type. (Eg. View all Android mk1
+     * models)
+     *
+     * @param allV1
+     */
     @Override
     public void printAllAndroidV1(Robot[] allV1) {
         for (Robot robot : allV1) {
@@ -90,6 +113,12 @@ public class RobotUI implements RobotContract.BaseView {
         bottomMenu();
     }
 
+    /**
+     * All available models of a particular type. (Eg. View all Fred the
+     * Friendlybot models)
+     *
+     * @param allV1
+     */
     @Override
     public void printAllAndroidV2(Robot[] allV2) {
         for (Robot robot : allV2) {
@@ -98,6 +127,11 @@ public class RobotUI implements RobotContract.BaseView {
         bottomMenu();
     }
 
+    /**
+     * Showing models of a particular type.
+     *
+     * @param robots
+     */
     @Override
     public void showRobotsByModel(List<Robot> robots) {
         for (Robot robot : robots) {
@@ -106,16 +140,15 @@ public class RobotUI implements RobotContract.BaseView {
         bottomMenu();
     }
 
+    /**
+     * Showing total counts of available types (Eg. how many Andy, how many
+     * Betty... etc
+     *
+     * @param model
+     */
     @Override
     public void showTotalCountsAvaliable(String model) {
         System.out.println(model);
-        bottomMenu();
-    }
-
-    @Override
-    public void onErrorEmptylist() {
-        System.err.println("\nEmpty list. Please build first/second"
-                + " generation on Menu Option (1) and (2) \n");
         bottomMenu();
     }
 }

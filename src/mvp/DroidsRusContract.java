@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author hal-9000
  */
-public interface RobotContract {
+public interface DroidsRusContract {
 
     public interface BaseView {
 
@@ -22,14 +22,12 @@ public interface RobotContract {
 
         public void showRobotsByModel(List<Robot> searchRobotByModel);
 
-        public void onErrorEmptylist();
-
         public void showTotalCountsAvaliable(String model);
     }
 
     public interface BasePresenter {
 
-        public void attach(RobotContract.BaseView view);
+        public void attach(DroidsRusContract.BaseView view);
 
         public void submitV1Androids();
 

@@ -7,7 +7,6 @@ package builder;
 
 import java.util.Random;
 import entity.Robot;
-import java.util.Arrays;
 
 /**
  *
@@ -63,17 +62,9 @@ public class RobotBuilder {
         return v2Androids;
     }
 
-    public Robot[] allV2Androids() {
-        return v2Androids;
-    }
-
-    public Robot[] allV1Androids() {
-        return v1Androids;
-    }
-
     private void embedBrainIn(Robot newRobot) {
         while (newRobot.getBrain() == null || newRobot.getBrain().isBlank()) {
-            Robot candidate = donatorRobot();
+            Robot candidate = findDonator();
             if (candidate.isDonate() && (!candidate.getBrain().isBlank())) {
                 newRobot.attachBrain(candidate.getBrain());
             }
@@ -82,7 +73,7 @@ public class RobotBuilder {
 
     private void embedMobilityIn(Robot newRobot) {
         while (newRobot.getMobility() == null || newRobot.getMobility().isBlank()) {
-            Robot donator = donatorRobot();
+            Robot donator = findDonator();
             if (donator.isDonate() && (!donator.getMobility().isBlank())) {
                 newRobot.attachMobility(donator.getMobility());
             }
@@ -91,7 +82,7 @@ public class RobotBuilder {
 
     private void embedVisionIn(Robot newRobot) {
         while (newRobot.getVision() == null || newRobot.getVision().isBlank()) {
-            Robot donator = donatorRobot();
+            Robot donator = findDonator();
             if (donator.isDonate() && (!donator.getVision().isBlank())) {
                 newRobot.attachVision(donator.getVision());
             }
@@ -100,7 +91,7 @@ public class RobotBuilder {
 
     private void embedArmsIn(Robot newRobot) {
         while (newRobot.getArms() == null || newRobot.getArms().isBlank()) {
-            Robot donator = donatorRobot();
+            Robot donator = findDonator();
             if (donator.isDonate() && (!donator.getArms().isBlank())) {
                 newRobot.attachArms(donator.getArms());
             }
@@ -109,7 +100,7 @@ public class RobotBuilder {
 
     private void embedMediaCenterIn(Robot newRobot) {
         while (newRobot.getMediaCenter() == null || newRobot.getMediaCenter().isBlank()) {
-            Robot donator = donatorRobot();
+            Robot donator = findDonator();
             if (donator.isDonate() && (!donator.getMediaCenter().isBlank())) {
                 newRobot.attachMediaCenter(donator.getMediaCenter());
             }
@@ -118,17 +109,22 @@ public class RobotBuilder {
 
     private void embedPowerPlantIn(Robot newRobot) {
         while (newRobot.getPowerPlant() == null || newRobot.getPowerPlant().isBlank()) {
-            Robot donator = donatorRobot();
+            Robot donator = findDonator();
             if (donator.isDonate() && (!donator.getPowerPlant().isBlank())) {
                 newRobot.attachPowerPlant(donator.getPowerPlant());
             }
         }
     }
 
-    private Robot donatorRobot() {
+    /**
+     * Try to found a donator only robots v1.
+     *
+     * @return
+     */
+    private Robot findDonator() {
         Robot v1Android = v1Androids[sortIndex()];
         if (!v1Android.isDonate()) {
-            donatorRobot();
+            findDonator();
         }
         return v1Android;
     }
@@ -143,40 +139,21 @@ public class RobotBuilder {
         return new Random().nextInt(v1Androids.length);
     }
 
-    public Robot[] searchRobotByModel(String model) {
-        Arrays.sort(v1Androids);
-        int robot = Arrays.binarySearch(v1Androids, model);
-        System.out.println("index - " + robot);
-        return null;
+    /**
+     * All Android v2.
+     *
+     * @return list of androids.
+     */
+    public Robot[] allV2Androids() {
+        return v2Androids;
     }
 
-    public void quickSort(int arr[], int begin, int end) {
-        if (begin < end) {
-            int partitionIndex = partition(arr, begin, end);
-
-            quickSort(arr, begin, partitionIndex - 1);
-            quickSort(arr, partitionIndex + 1, end);
-        }
-    }
-
-    private int partition(int arr[], int begin, int end) {
-        int pivot = arr[end];
-        int i = (begin - 1);
-
-        for (int j = begin; j < end; j++) {
-            if (arr[j] <= pivot) {
-                i++;
-
-                int swapTemp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = swapTemp;
-            }
-        }
-
-        int swapTemp = arr[i + 1];
-        arr[i + 1] = arr[end];
-        arr[end] = swapTemp;
-
-        return i + 1;
+    /**
+     * All Android v1.
+     *
+     * @return list of androids.
+     */
+    public Robot[] allV1Androids() {
+        return v1Androids;
     }
 }
