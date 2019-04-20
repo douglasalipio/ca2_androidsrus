@@ -100,12 +100,26 @@ public class ToolsBuilder {
      *
      * @return
      */
-    public String model() {
+    public String v1Model() {
         String models[] = {"Android mk1 ",
             "Android mk2 ",
             "Android mk3 ",
             "Android mk4 ",
             "Android mk5 "};
+        int modelsIndex = random.nextInt(models.length);
+        return models[modelsIndex];
+    }
+
+    /**
+     * Build a model component.
+     *
+     * @return
+     */
+    public String v2Model() {
+        String models[] = {"Andy ",
+            "Betty",
+            "Bobi",
+            "Fred"};
         int modelsIndex = random.nextInt(models.length);
         return models[modelsIndex];
     }

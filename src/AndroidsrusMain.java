@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 
-import datastructure.RobotTree;
 import mvp.RobotUI;
 
 /**

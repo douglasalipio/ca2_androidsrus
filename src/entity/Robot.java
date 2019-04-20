@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mvp;
+package entity;
 
 import java.util.Date;
 
@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class Robot {
 
-    private long serialNumber;
+    private final long serialNumber;
     private String model;
     private String brain;
     private String mobility;
@@ -21,7 +21,7 @@ public class Robot {
     private String arms;
     private String mediaCenter;
     private String powerPlant;
-    private static int donatorCount;
+    private int donatorCount;
 
     public Robot(
             String model,
@@ -42,7 +42,11 @@ public class Robot {
         this.serialNumber = System.nanoTime();
     }
 
-    public void attachModel(String model) {
+    public Robot() {
+        this.serialNumber = System.nanoTime();
+    }
+
+    public void attachMoodel(String model) {
         this.model = model;
     }
 
@@ -54,11 +58,11 @@ public class Robot {
         this.mobility = mobility;
     }
 
-    public void attchVision(String vision) {
+    public void attachVision(String vision) {
         this.vision = vision;
     }
 
-    public void attchArms(String arms) {
+    public void attachArms(String arms) {
         this.arms = arms;
     }
 
@@ -70,57 +74,36 @@ public class Robot {
         this.powerPlant = powerPlant;
     }
 
-    public long attachSerialNumber() {
-        return serialNumber;
+    public String getModel() {
+        return model;
     }
 
-    public String donateBrain() {
-        String brainDonated = model;
-        this.brain = "";
-        ++donatorCount;
-        return brainDonated;
+    public String getBrain() {
+        return brain;
     }
 
-    public String doateMobility() {
-        String mobilityDonated = model;
-        this.mobility = "";
-        ++donatorCount;
-        return mobilityDonated;
+    public String getMobility() {
+        return mobility;
     }
 
-    public String donateVision() {
-        String visionDonated = model;
-        this.vision = "";
-        ++donatorCount;
-        return visionDonated;
+    public String getVision() {
+        return vision;
     }
 
-    public String donateArms() {
-        String armsDonated = model;
-        this.arms = "";
-        ++donatorCount;
-        return armsDonated;
+    public String getArms() {
+        return arms;
     }
 
-    public String donateMediaCenter() {
-        String mediaCenterDonated = model;
-        this.mediaCenter = "";
-        ++donatorCount;
-        return mediaCenterDonated;
+    public String getMediaCenter() {
+        return mediaCenter;
     }
 
-    public String donatePowerPlant() {
-        String powerPlantDonated = model;
-        this.powerPlant = "";
-        ++donatorCount;
-        return powerPlantDonated;
+    public String getPowerPlant() {
+        return powerPlant;
     }
 
-    public String donateModel() {
-        String modelDonated = model;
-        this.model = "";
-        ++donatorCount;
-        return modelDonated;
+    public int getDonatorCount() {
+        return donatorCount;
     }
 
     public long getSerialNumber() {
@@ -128,21 +111,31 @@ public class Robot {
     }
 
     public boolean isDonate() {
-        return donatorCount != 2;
+        return donatorCount <= 2;
     }
 
     @Override
     public String toString() {
-        return "------------ v1 Android Information --------------\n"
+        return "---------------Android Information --------------\n"
                 + "Model: " + model + "\n"
                 + "SerialNum: " + serialNumber + "\n"
                 + "Brain:" + brain + "\n"
                 + "Mobility:" + mobility + "\n"
                 + "Vision:" + vision + "\n"
                 + "Arms: " + arms + "\n"
-                + "Media Center:" + mediaCenter + "\n"
-                + "Power Plant:" + powerPlant + "\n"
+                + "Media Center: " + mediaCenter + "\n"
+                + "Power Plant: " + powerPlant + "\n"
                 + "--------------------------------------------------";
+    }
+
+    public enum Component {
+        BRAIN,
+        MOBILITY,
+        VISION,
+        ARMS,
+        MEDI_CENTER,
+        POWER_PLANT,
+        UNAVAILABLE
     }
 
 }
