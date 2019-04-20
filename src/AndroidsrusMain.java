@@ -19,5 +19,4 @@ public class AndroidsrusMain {
         RobotUI ui = new RobotUI();
         ui.showMainMenu();
     }
-
 }

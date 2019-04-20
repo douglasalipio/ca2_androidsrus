@@ -22,71 +22,63 @@ public class RobotUI implements RobotContract.BaseView {
         presenter.attach(this);
     }
 
-    @Override
-    public void showFirstGeneration(Robot[] robots) {
-        for (Robot robot : robots) {
-            System.out.println(robot.toString());
-        }
-        bottomMenu();
-    }
-
-    @Override
-    public void showSecondGeneration(Robot[] robots) {
-        for (Robot robot : robots) {
-            System.out.println(robot.toString());
-        }
-        bottomMenu();
-    }
-
     public void showMainMenu() {
-
         System.out.println("**--DroidsRus App---------------------**");
         System.out.println("**------------------------------------**");
         System.out.println("**------------------------------------**");
-        System.out.println("**-----------Build features-----------**");
         System.out.println("**------------------------------------**");
-        System.out.println(" 1 - Generate first version");
-        System.out.println(" 2 - Generate second version");
         System.out.println("**------------------------------------**");
         System.out.println("**------search features---------------**");
         System.out.println("**------------------------------------**");
-        System.out.println(" 3 - Show all android v1");
-        System.out.println(" 4 - Show all android v2");
-        System.out.println(" 5 - Search by type");
-        System.out.println(" 6 - Total count by type");
-        System.out.println(" 7 - Donators");
+        System.out.println(" 1 - Show all android v1");
+        System.out.println(" 2 - Show all android v2");
+        System.out.println(" 3 - Search by type");
+        System.out.println(" 4 - Total count by type");
+        System.out.println(" 5 - Donators");
         System.out.println(" 0 - Close app");
 
         int option = reader.nextInt();
         switch (option) {
             case 1:
-                presenter.generateFirstGeneration();
-                break;
-            case 2:
-                presenter.generateSecondGeneration();
-                break;
-            case 3:
                 presenter.submitV1Androids();
                 break;
-            case 4:
+            case 2:
                 presenter.submitV2Androids();
                 break;
+            case 3:
+                menuSearchByType();
+                break;
+            case 4:
+                menuTotalCounts();
+                break;
+
         }
 
     }
 
-    private void bottomMenu() {
+    private void menuTotalCounts() {
+        Scanner reader = new Scanner(System.in);
+        System.out.println("Eg.: how many Andy, how many Betty etc.");
+        System.out.println("Enter a model");
+        String type = reader.nextLine();
+        presenter.findTotalTypes(type);
+    }
 
+    private void menuSearchByType() {
+        Scanner reader = new Scanner(System.in);
+        System.out.println("Eg.: Andy, mk1, Fred etc.");
+        System.out.println("Enter a model");
+        String model = reader.nextLine();
+        presenter.findRobotByModel(model);
+    }
+
+    private void bottomMenu() {
+        Scanner reader = new Scanner(System.in);
         System.out.println(" 1 - Back to menu");
-        System.out.println(" 2 - Close app");
 
         int option = reader.nextInt();
-        switch (option) {
-            case 1:
-                showMainMenu();
-                break;
-            case 2:
-                break;
+        if (option == 1) {
+            showMainMenu();
         }
     }
 
@@ -107,17 +99,23 @@ public class RobotUI implements RobotContract.BaseView {
     }
 
     @Override
-    public void onEmptyV1AndroidList() {
-        System.out.println("\nEmpty list. Please build first "
-                + "generation on Menu Option (1)\n");
+    public void showRobotsByModel(List<Robot> robots) {
+        for (Robot robot : robots) {
+            System.out.println(robot.toString());
+        }
         bottomMenu();
     }
 
     @Override
-    public void onEmptyV2AndroidList() {
-        System.out.println("\nEmpty list. Please build second"
-                + " generation on Menu Option (2)\n");
+    public void showTotalCountsAvaliable(String model) {
+        System.out.println(model);
         bottomMenu();
     }
 
+    @Override
+    public void onErrorEmptylist() {
+        System.err.println("\nEmpty list. Please build first/second"
+                + " generation on Menu Option (1) and (2) \n");
+        bottomMenu();
+    }
 }

@@ -5,10 +5,9 @@
  */
 package builder;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 import entity.Robot;
+import java.util.Arrays;
 
 /**
  *
@@ -16,22 +15,23 @@ import entity.Robot;
  */
 public class RobotBuilder {
 
-    private static final RobotBuilder instance = new RobotBuilder();
+    private static final RobotBuilder INSTANCE = new RobotBuilder();
     private static final int V1_BUNCH_SIZE = 600;
     private static final int V2_BUNCH_SIZE = 400;
-    private ToolsBuilder toolsBuilder = ToolsBuilder.instance();
+    private final ToolsBuilder toolsBuilder = ToolsBuilder.instance();
     private Robot[] v1Androids = null;
     private Robot[] v2Androids = null;
 
     private RobotBuilder() {
-
+        v1Bunch();
+        v2Bunch();
     }
 
     public static RobotBuilder instance() {
-        return instance;
+        return INSTANCE;
     }
 
-    public Robot[] v1Bunch() {
+    private Robot[] v1Bunch() {
         v1Androids = new Robot[V1_BUNCH_SIZE];
         for (int i = 0; i < V1_BUNCH_SIZE; i++) {
             Robot robot = new Robot(toolsBuilder.v1Model(),
@@ -47,7 +47,7 @@ public class RobotBuilder {
         return v1Androids;
     }
 
-    public Robot[] v2Bunch() {
+    private Robot[] v2Bunch() {
         v2Androids = new Robot[V2_BUNCH_SIZE];
         for (int i = 0; i < V2_BUNCH_SIZE; i++) {
             Robot v2Robot = new Robot();
@@ -141,5 +141,42 @@ public class RobotBuilder {
      */
     private int sortIndex() {
         return new Random().nextInt(v1Androids.length);
+    }
+
+    public Robot[] searchRobotByModel(String model) {
+        Arrays.sort(v1Androids);
+        int robot = Arrays.binarySearch(v1Androids, model);
+        System.out.println("index - " + robot);
+        return null;
+    }
+
+    public void quickSort(int arr[], int begin, int end) {
+        if (begin < end) {
+            int partitionIndex = partition(arr, begin, end);
+
+            quickSort(arr, begin, partitionIndex - 1);
+            quickSort(arr, partitionIndex + 1, end);
+        }
+    }
+
+    private int partition(int arr[], int begin, int end) {
+        int pivot = arr[end];
+        int i = (begin - 1);
+
+        for (int j = begin; j < end; j++) {
+            if (arr[j] <= pivot) {
+                i++;
+
+                int swapTemp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = swapTemp;
+            }
+        }
+
+        int swapTemp = arr[i + 1];
+        arr[i + 1] = arr[end];
+        arr[end] = swapTemp;
+
+        return i + 1;
     }
 }
