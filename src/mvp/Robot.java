@@ -21,6 +21,7 @@ public class Robot {
     private String arms;
     private String mediaCenter;
     private String powerPlant;
+    private static int donatorCount;
 
     public Robot(
             String model,
@@ -39,6 +40,10 @@ public class Robot {
         this.mediaCenter = mediaCenter;
         this.powerPlant = powerPlant;
         this.serialNumber = System.nanoTime();
+    }
+
+    public void attachModel(String model) {
+        this.model = model;
     }
 
     public void attachBrain(String brain) {
@@ -70,41 +75,61 @@ public class Robot {
     }
 
     public String donateBrain() {
-        return brain;
+        String brainDonated = model;
+        this.brain = "";
+        ++donatorCount;
+        return brainDonated;
     }
 
     public String doateMobility() {
-        return mobility;
+        String mobilityDonated = model;
+        this.mobility = "";
+        ++donatorCount;
+        return mobilityDonated;
     }
 
     public String donateVision() {
-        return vision;
+        String visionDonated = model;
+        this.vision = "";
+        ++donatorCount;
+        return visionDonated;
     }
 
     public String donateArms() {
-        return arms;
+        String armsDonated = model;
+        this.arms = "";
+        ++donatorCount;
+        return armsDonated;
     }
 
     public String donateMediaCenter() {
-        return mediaCenter;
+        String mediaCenterDonated = model;
+        this.mediaCenter = "";
+        ++donatorCount;
+        return mediaCenterDonated;
     }
 
     public String donatePowerPlant() {
-        return powerPlant;
-    }
-
-    public void attachModel() {
-        this.model = model;
+        String powerPlantDonated = model;
+        this.powerPlant = "";
+        ++donatorCount;
+        return powerPlantDonated;
     }
 
     public String donateModel() {
-        return model;
+        String modelDonated = model;
+        this.model = "";
+        ++donatorCount;
+        return modelDonated;
     }
 
     public long getSerialNumber() {
         return this.serialNumber;
     }
 
+    public boolean isDonate() {
+        return donatorCount != 2;
+    }
 
     @Override
     public String toString() {
