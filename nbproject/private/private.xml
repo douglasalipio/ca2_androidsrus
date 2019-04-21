@@ -2,6 +2,11 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/Users/hal-9000/Dropbox/CCT/Algorithim/CA2/androidsRus-douglas/src/mvp/DroidRusPresenter.java</file>
+            <file>file:/Users/hal-9000/Dropbox/CCT/Algorithim/CA2/androidsRus-douglas/src/entity/Robot.java</file>
+            <file>file:/Users/hal-9000/Dropbox/CCT/Algorithim/CA2/androidsRus-douglas/src/builder/RobotBuilder.java</file>
+            <file>file:/Users/hal-9000/Dropbox/CCT/Algorithim/CA2/androidsRus-douglas/src/mvp/DroidsRusUI.java</file>
+        </group>
     </open-files>
 </project-private>

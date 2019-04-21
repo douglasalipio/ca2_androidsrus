@@ -23,6 +23,9 @@ public interface DroidsRusContract {
         public void showRobotsByModel(List<Robot> searchRobotByModel);
 
         public void showTotalCountsAvaliable(String model);
+
+        public void showDroidDonators(Robot receiver, List<Robot> donators);
+
     }
 
     public interface BasePresenter {
@@ -35,7 +38,9 @@ public interface DroidsRusContract {
 
         public void findRobotByModel(String model);
 
-        public void findTotalTypes(String type);
+        public void findTotalTypes(String model);
+
+        public void findDRoidDonatiors(String model);
     }
 
 }

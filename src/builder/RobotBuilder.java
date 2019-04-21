@@ -7,6 +7,9 @@ package builder;
 
 import java.util.Random;
 import entity.Robot;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  *
@@ -50,7 +53,7 @@ public class RobotBuilder {
         v2Androids = new Robot[V2_BUNCH_SIZE];
         for (int i = 0; i < V2_BUNCH_SIZE; i++) {
             Robot v2Robot = new Robot();
-            v2Robot.attachMoodel(toolsBuilder.v2Model());
+            v2Robot.attachModel(toolsBuilder.v2Model());
             embedBrainIn(v2Robot);
             embedMobilityIn(v2Robot);
             embedVisionIn(v2Robot);
@@ -63,55 +66,55 @@ public class RobotBuilder {
     }
 
     private void embedBrainIn(Robot newRobot) {
-        while (newRobot.getBrain() == null || newRobot.getBrain().isBlank()) {
-            Robot candidate = findDonator();
-            if (candidate.isDonate() && (!candidate.getBrain().isBlank())) {
-                newRobot.attachBrain(candidate.getBrain());
+        while (newRobot.getBrain() == null) {
+            Robot donator = findDonator();
+            if (!donator.getBrain().getValue().isBlank()) {
+                newRobot.attachBrain(donator.donateBrain());
             }
         }
     }
 
     private void embedMobilityIn(Robot newRobot) {
-        while (newRobot.getMobility() == null || newRobot.getMobility().isBlank()) {
+        while (newRobot.getMobility() == null) {
             Robot donator = findDonator();
-            if (donator.isDonate() && (!donator.getMobility().isBlank())) {
-                newRobot.attachMobility(donator.getMobility());
+            if (!donator.getMobility().getValue().isBlank()) {
+                newRobot.attachMobility(donator.donateMobility());
             }
         }
     }
 
     private void embedVisionIn(Robot newRobot) {
-        while (newRobot.getVision() == null || newRobot.getVision().isBlank()) {
+        while (newRobot.getVision() == null) {
             Robot donator = findDonator();
-            if (donator.isDonate() && (!donator.getVision().isBlank())) {
-                newRobot.attachVision(donator.getVision());
+            if (!donator.getVision().getValue().isBlank()) {
+                newRobot.attachVision(donator.donateVision());
             }
         }
     }
 
     private void embedArmsIn(Robot newRobot) {
-        while (newRobot.getArms() == null || newRobot.getArms().isBlank()) {
+        while (newRobot.getArms() == null) {
             Robot donator = findDonator();
-            if (donator.isDonate() && (!donator.getArms().isBlank())) {
-                newRobot.attachArms(donator.getArms());
+            if (!donator.getArms().getValue().isBlank()) {
+                newRobot.attachArms(donator.donatehArms());
             }
         }
     }
 
     private void embedMediaCenterIn(Robot newRobot) {
-        while (newRobot.getMediaCenter() == null || newRobot.getMediaCenter().isBlank()) {
+        while (newRobot.getMediaCenter() == null) {
             Robot donator = findDonator();
-            if (donator.isDonate() && (!donator.getMediaCenter().isBlank())) {
-                newRobot.attachMediaCenter(donator.getMediaCenter());
+            if (!donator.getMediaCenter().getValue().isBlank()) {
+                newRobot.attachMediaCenter(donator.donateMediaCenter());
             }
         }
     }
 
     private void embedPowerPlantIn(Robot newRobot) {
-        while (newRobot.getPowerPlant() == null || newRobot.getPowerPlant().isBlank()) {
+        while (newRobot.getPowerPlant() == null) {
             Robot donator = findDonator();
-            if (donator.isDonate() && (!donator.getPowerPlant().isBlank())) {
-                newRobot.attachPowerPlant(donator.getPowerPlant());
+            if (!donator.getPowerPlant().getValue().isBlank()) {
+                newRobot.attachPowerPlant(donator.donatePowerPlant());
             }
         }
     }
@@ -119,7 +122,7 @@ public class RobotBuilder {
     /**
      * Try to found a donator only robots v1.
      *
-     * @return
+     * @return donator
      */
     private Robot findDonator() {
         Robot v1Android = v1Androids[sortIndex()];
@@ -155,5 +158,12 @@ public class RobotBuilder {
      */
     public Robot[] allV1Androids() {
         return v1Androids;
+    }
+
+    public List<Robot> allAndroids() {
+        List<Robot> androids = new ArrayList();
+        androids.addAll(Arrays.asList(v1Androids));
+        androids.addAll(Arrays.asList(v2Androids));
+        return androids;
     }
 }

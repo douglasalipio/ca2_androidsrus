@@ -31,6 +31,7 @@ public class DroidsRusUI implements DroidsRusContract.BaseView {
      * Main Menu.
      */
     public void showMainMenu() {
+
         System.out.println("**--DroidsRus App---------------------**");
         System.out.println("**------------------------------------**");
         System.out.println("**------------------------------------**");
@@ -59,16 +60,26 @@ public class DroidsRusUI implements DroidsRusContract.BaseView {
             case 4:
                 menuTotalCounts();
                 break;
+            case 5:
+                menuDonated();
+                break;
 
         }
 
+    }
+
+    private void menuDonated() {
+        Scanner reader = new Scanner(System.in);
+        System.out.println("Eg.:Andy, Betty, Mk1, Mk2 etc.");
+        System.out.println("Enter a model");
+        String model = reader.nextLine();
+        presenter.findDRoidDonatiors(model);
     }
 
     /**
      * Ask for total counts of available types to make the search.
      */
     private void menuTotalCounts() {
-        Scanner reader = new Scanner(System.in);
         System.out.println("Eg.: how many Andy, how many Betty etc.");
         System.out.println("Enter a model");
         String type = reader.nextLine();
@@ -151,4 +162,27 @@ public class DroidsRusUI implements DroidsRusContract.BaseView {
         System.out.println(model);
         bottomMenu();
     }
+
+    @Override
+    public void showDroidDonators(Robot receiver, List<Robot> donators) {
+
+        for (Robot donator : donators) {
+            System.out.println(donator.toString());
+        }
+
+        System.out.println("-----------------------------");
+        System.out.println("Parts donated");
+        System.out.println("-----------------------------");
+        System.out.println("Brain: " + receiver.getBrain().getValue() + " | Donator ID - " + receiver.getBrain().getKey());
+        System.out.println("Mobility: " + receiver.getMobility().getValue() + "| Donator ID - " + receiver.getMobility().getKey());
+        System.out.println("Vision: " + receiver.getVision().getValue() + "| Donator ID - " + receiver.getVision().getKey());
+        System.out.println("Arms: " + receiver.getArms().getValue() + " | Donator ID - " + receiver.getArms().getKey());
+        System.out.println("Media Center: " + receiver.getMediaCenter().getValue() + " | Donator ID - " + receiver.getMediaCenter().getKey());
+        System.out.println("Power Plant: " + receiver.getPowerPlant().getValue() + " | Donator ID - " + receiver.getPowerPlant().getKey());
+        System.out.println("-----------------------------");
+        System.out.print("Receiver\n" + receiver.toString() + "");
+        System.out.print("\n");
+        bottomMenu();
+    }
+
 }
