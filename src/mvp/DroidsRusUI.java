@@ -17,7 +17,6 @@ import java.util.Scanner;
 public class DroidsRusUI implements DroidsRusContract.BaseView {
 
     private DroidsRusContract.BasePresenter presenter = new DroidRusPresenter();
-    private final Scanner reader = new Scanner(System.in);
 
     /**
      * Creating the APP UI.
@@ -31,7 +30,7 @@ public class DroidsRusUI implements DroidsRusContract.BaseView {
      * Main Menu.
      */
     public void showMainMenu() {
-
+        Scanner reader = new Scanner(System.in);
         System.out.println("**--DroidsRus App---------------------**");
         System.out.println("**------------------------------------**");
         System.out.println("**------------------------------------**");
@@ -39,11 +38,12 @@ public class DroidsRusUI implements DroidsRusContract.BaseView {
         System.out.println("**------------------------------------**");
         System.out.println("**------search features---------------**");
         System.out.println("**------------------------------------**");
-        System.out.println(" 1 - Show all android v1");
-        System.out.println(" 2 - Show all android v2");
-        System.out.println(" 3 - Search by type");
-        System.out.println(" 4 - Total count by type");
-        System.out.println(" 5 - Donators");
+        System.out.println(" 1 - Print all android v1");
+        System.out.println(" 2 - Print all android v2");
+        System.out.println(" 3 - Search by model");
+        System.out.println(" 4 - Total count by model");
+        System.out.println(" 5 - Search all donators by model");
+        System.out.println(" 6 - Search donator by Serial number");
         System.out.println(" 0 - Close app");
 
         int option = reader.nextInt();
@@ -63,6 +63,9 @@ public class DroidsRusUI implements DroidsRusContract.BaseView {
             case 5:
                 menuDonated();
                 break;
+            case 6:
+                menuDonatedById();
+                break;
 
         }
 
@@ -73,17 +76,18 @@ public class DroidsRusUI implements DroidsRusContract.BaseView {
         System.out.println("Eg.:Andy, Betty, Mk1, Mk2 etc.");
         System.out.println("Enter a model");
         String model = reader.nextLine();
-        presenter.findDRoidDonatiors(model);
+        presenter.submitAllDonorsByModel(model);
     }
 
     /**
      * Ask for total counts of available types to make the search.
      */
     private void menuTotalCounts() {
+        Scanner reader = new Scanner(System.in);
         System.out.println("Eg.: how many Andy, how many Betty etc.");
         System.out.println("Enter a model");
         String type = reader.nextLine();
-        presenter.findTotalTypes(type);
+        presenter.submitTotalRobotByModel(type);
     }
 
     /**
@@ -94,7 +98,7 @@ public class DroidsRusUI implements DroidsRusContract.BaseView {
         System.out.println("Eg.: Andy, mk1, Fred etc.");
         System.out.println("Enter a model");
         String model = reader.nextLine();
-        presenter.findRobotByModel(model);
+        presenter.submitRobotByModel(model);
     }
 
     /**
@@ -117,7 +121,7 @@ public class DroidsRusUI implements DroidsRusContract.BaseView {
      * @param allV1
      */
     @Override
-    public void printAllAndroidV1(Robot[] allV1) {
+    public void showAllAndroidV1(Robot[] allV1) {
         for (Robot robot : allV1) {
             System.out.println(robot.toString());
         }
@@ -131,7 +135,7 @@ public class DroidsRusUI implements DroidsRusContract.BaseView {
      * @param allV1
      */
     @Override
-    public void printAllAndroidV2(Robot[] allV2) {
+    public void showAllAndroidV2(Robot[] allV2) {
         for (Robot robot : allV2) {
             System.out.println(robot.toString());
         }
@@ -158,7 +162,7 @@ public class DroidsRusUI implements DroidsRusContract.BaseView {
      * @param model
      */
     @Override
-    public void showTotalCountsAvaliable(String model) {
+    public void showTotalRobots(String model) {
         System.out.println(model);
         bottomMenu();
     }
@@ -182,7 +186,15 @@ public class DroidsRusUI implements DroidsRusContract.BaseView {
         System.out.println("-----------------------------");
         System.out.print("Receiver\n" + receiver.toString() + "");
         System.out.print("\n");
-        bottomMenu();
+
+    }
+
+    private void menuDonatedById() {
+        Scanner reader = new Scanner(System.in);
+        System.out.println("Tips: Go to option [1] or [2] to see serial number of Android v1 or Andoid v2");
+        System.out.println("Enter a serial number");
+        long id = reader.nextLong();
+        presenter.submitDonatorByModelId(id);
     }
 
 }

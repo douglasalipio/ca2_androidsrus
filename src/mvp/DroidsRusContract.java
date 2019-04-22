@@ -16,13 +16,13 @@ public interface DroidsRusContract {
 
     public interface BaseView {
 
-        public void printAllAndroidV1(Robot[] allV1);
+        public void showAllAndroidV1(Robot[] allV1);
 
-        public void printAllAndroidV2(Robot[] allV2);
+        public void showAllAndroidV2(Robot[] allV2);
 
         public void showRobotsByModel(List<Robot> searchRobotByModel);
 
-        public void showTotalCountsAvaliable(String model);
+        public void showTotalRobots(String model);
 
         public void showDroidDonators(Robot receiver, List<Robot> donators);
 
@@ -36,11 +36,13 @@ public interface DroidsRusContract {
 
         public void submitV2Androids();
 
-        public void findRobotByModel(String model);
+        public void submitRobotByModel(String model);
 
-        public void findTotalTypes(String model);
+        public void submitTotalRobotByModel(String model);
 
-        public void findDRoidDonatiors(String model);
+        public void submitAllDonorsByModel(String model);
+
+        public void submitDonatorByModelId(long id);
     }
 
 }

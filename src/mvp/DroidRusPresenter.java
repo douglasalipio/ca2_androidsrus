@@ -9,8 +9,10 @@ import builder.RobotBuilder;
 import entity.Robot;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
+ * Controlling the logic of DroidsRus.
  *
  * @author hal-9000
  */
@@ -20,98 +22,136 @@ public class DroidRusPresenter implements DroidsRusContract.BasePresenter {
     private DroidsRusContract.BaseView view;
     private final List<Robot> robots = robotBuilder.allAndroids();
 
+    /**
+     * Dependency injection from view.
+     *
+     * @param view
+     */
     @Override
     public void attach(DroidsRusContract.BaseView view) {
         this.view = view;
     }
 
+    /**
+     * Send to view all android v1.
+     */
     @Override
     public void submitV1Androids() {
-        view.printAllAndroidV1(robotBuilder.allV1Androids());
+        view.showAllAndroidV1(robotBuilder.allV1Androids());
     }
 
+    /**
+     * Send to view all android v2.
+     */
     @Override
     public void submitV2Androids() {
-        view.printAllAndroidV2(robotBuilder.allV2Androids());
+        view.showAllAndroidV2(robotBuilder.allV2Androids());
     }
 
+    /**
+     * Validating if exist robots with a specific model.
+     *
+     * @param model filter of the search.
+     */
     @Override
-    public void findRobotByModel(String model) {
+    public void submitRobotByModel(String model) {
         if (robots != null) {
-            view.showRobotsByModel(searchRobotByModel(model, robots));
+            view.showRobotsByModel(findRobotByModel(model));
         }
 
     }
 
+    /**
+     * Retrieving the number of androids in stock by model.
+     *
+     * @param model filter of the search.
+     */
     @Override
-    public void findTotalTypes(String model) {
-        int totalCount = 0;
-        if (robots != null) {
-            totalCount += searchTotalModelAvailable(model, robots);
-            view.showTotalCountsAvaliable("Total count for " + model + " is " + totalCount);
-        }
+    public void submitTotalRobotByModel(String model) {
+        int totalCount = robots
+                .stream()
+                .filter((robot) -> (normalize(robot.getModel()).equals(normalize(model))))
+                .toArray().length;
+
+        view.showTotalRobots("Total count for " + model + " is " + totalCount);
+
     }
 
+    /**
+     * Retrieving all donors of all models.
+     *
+     * @param model filter of the search.
+     */
     @Override
-    public void findDRoidDonatiors(String model) {
-        for (Robot droidReceiver : searchRobotByModel(model, robots)) {
-            view.showDroidDonators(droidReceiver, searchDonatorParts(droidReceiver));
-            break;
-        }
+    public void submitAllDonorsByModel(String model) {
+        findRobotByModel(model).forEach((droidReceiver) -> {
+            view.showDroidDonators(droidReceiver, findDonorComponents(droidReceiver));
+        });
     }
 
-    private List<Robot> searchDonatorParts(Robot donator) {
+    /**
+     * Retrieving donor of a model by id.
+     *
+     * @param id
+     */
+    @Override
+    public void submitDonatorByModelId(long id) {
+        Robot receiver = findRobotById(id);
+        view.showDroidDonators(receiver, findDonorComponents(receiver));
+    }
+
+    /**
+     * Retrieving all donors of an android
+     *
+     * @param receiver Android who wants to know his donors.
+     * @return a list of donors.
+     */
+    private List<Robot> findDonorComponents(Robot receiver) {
         List<Robot> robotContainer = new ArrayList();
-        robotContainer.add(searchRobotById(donator.getBrain().getKey()));
-        robotContainer.add(searchRobotById(donator.getMobility().getKey()));
-        robotContainer.add(searchRobotById(donator.getVision().getKey()));
-        robotContainer.add(searchRobotById(donator.getArms().getKey()));
-        robotContainer.add(searchRobotById(donator.getMediaCenter().getKey()));
-        robotContainer.add(searchRobotById(donator.getPowerPlant().getKey()));
-        //mergeDroids(robotContainer);
+        robotContainer.add(findRobotById(receiver.getBrain().getKey()));
+        robotContainer.add(findRobotById(receiver.getMobility().getKey()));
+        robotContainer.add(findRobotById(receiver.getVision().getKey()));
+        robotContainer.add(findRobotById(receiver.getArms().getKey()));
+        robotContainer.add(findRobotById(receiver.getMediaCenter().getKey()));
+        robotContainer.add(findRobotById(receiver.getPowerPlant().getKey()));
         return robotContainer;
     }
 
-    private void mergeDroids(List<Robot> robots) {
-        for (int i = 0; i < robots.size(); i++) {
-            for (int j = 0; j < robots.size(); j++) {
-                if (robots.get(i).getSerialNumber() == robots.get(j).getSerialNumber()) {
-                    robots.remove(j);
-                }
-            }
-        }
+    /**
+     * Retrieving android by id.
+     *
+     * @param id the serial number of the android.
+     * @return robot found.
+     */
+    private Robot findRobotById(long id) {
+        return robots
+                .stream()
+                .filter((robot) -> (robot.getSerialNumber() == id))
+                .findAny()
+                .orElse(null);
     }
 
-    private Robot searchRobotById(long serialNumber) {
-        for (Robot robot : robots) {
-            if (robot.getSerialNumber() == serialNumber) {
-                return robot;
-            }
-        }
-        return null;
+    /**
+     * Retrieving android by model.
+     *
+     * @param model find by model
+     * @return robot found.
+     */
+    private List<Robot> findRobotByModel(String model) {
+        return robots
+                .stream()
+                .filter((robot) -> (normalize(robot.getModel()).equals(normalize(model))))
+                .collect(Collectors.toList());
     }
 
-    private List<Robot> searchRobotByModel(String model, List<Robot> robots) {
-        List<Robot> robotsContainer = new ArrayList();
-        for (Robot robot : robots) {
-            if (robot.getModel().toLowerCase().trim().equals(model.trim().toLowerCase())) {
-                robotsContainer.add(robot);
-            }
-        }
-
-        return robotsContainer;
-    }
-
-    private int searchTotalModelAvailable(String model, List<Robot> robots) {
-        int totalCount = 0;
-        for (Robot robot : robots) {
-            if (robot.getModel().trim().toLowerCase()
-                    .equals(model.trim().toLowerCase())) {
-                totalCount++;
-            }
-        }
-
-        return totalCount;
+    /**
+     * Making the user's input normalized Eg: from "Hey there" to "hey there"
+     *
+     * @param value input
+     * @return string normalized
+     */
+    private String normalize(String value) {
+        return value.toLowerCase();
     }
 
 }
