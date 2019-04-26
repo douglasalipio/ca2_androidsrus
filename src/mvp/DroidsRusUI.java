@@ -16,7 +16,7 @@ import java.util.Scanner;
  */
 public class DroidsRusUI implements DroidsRusContract.BaseView {
 
-    private DroidsRusContract.BasePresenter presenter = new DroidRusPresenter();
+    private final DroidsRusContract.BasePresenter presenter = new DroidRusPresenter();
 
     /**
      * Creating the APP UI.
@@ -43,7 +43,6 @@ public class DroidsRusUI implements DroidsRusContract.BaseView {
         System.out.println(" 3 - Search by model");
         System.out.println(" 4 - Total count by model");
         System.out.println(" 5 - Search all donators by model");
-        System.out.println(" 6 - Search donator by Serial number");
         System.out.println(" 0 - Close app");
 
         int option = reader.nextInt();
@@ -55,7 +54,7 @@ public class DroidsRusUI implements DroidsRusContract.BaseView {
                 presenter.submitV2Androids();
                 break;
             case 3:
-                menuSearchByType();
+                menuTotalCountsByModel();
                 break;
             case 4:
                 menuTotalCounts();
@@ -63,39 +62,38 @@ public class DroidsRusUI implements DroidsRusContract.BaseView {
             case 5:
                 menuDonated();
                 break;
-            case 6:
-                menuDonatedById();
-                break;
-
         }
 
     }
 
+    /**
+     * Asking for android donators model.
+     */
     private void menuDonated() {
         Scanner reader = new Scanner(System.in);
-        System.out.println("Eg.:Andy, Betty, Mk1, Mk2 etc.");
+        System.out.println("Eg: Andy, Betty, Fred, Bobi");
         System.out.println("Enter a model");
         String model = reader.nextLine();
         presenter.submitAllDonorsByModel(model);
     }
 
     /**
-     * Ask for total counts of available types to make the search.
+     * Asking for total counts of available types to make the search.
      */
     private void menuTotalCounts() {
         Scanner reader = new Scanner(System.in);
-        System.out.println("Eg.: how many Andy, how many Betty etc.");
+        System.out.println("Eg: Andy, Betty, Android mk1, Android mk2, etc");
         System.out.println("Enter a model");
         String type = reader.nextLine();
         presenter.submitTotalRobotByModel(type);
     }
 
     /**
-     * Ask for model to make the search.
+     * Asking for model to make the search.
      */
-    private void menuSearchByType() {
+    private void menuTotalCountsByModel() {
         Scanner reader = new Scanner(System.in);
-        System.out.println("Eg.: Andy, mk1, Fred etc.");
+        System.out.println("Eg.: Andy, Betty, Android mk1, Android mk2, etc.");
         System.out.println("Enter a model");
         String model = reader.nextLine();
         presenter.submitRobotByModel(model);
@@ -129,10 +127,10 @@ public class DroidsRusUI implements DroidsRusContract.BaseView {
     }
 
     /**
-     * All available models of a particular type. (Eg. View all Fred the
+     * All available models of a particular type.(Eg. View all Fred the
      * Friendlybot models)
      *
-     * @param allV1
+     * @param allV2
      */
     @Override
     public void showAllAndroidV2(Robot[] allV2) {
@@ -167,34 +165,34 @@ public class DroidsRusUI implements DroidsRusContract.BaseView {
         bottomMenu();
     }
 
+    /**
+     * Showing android donator.
+     *
+     * @param receiver
+     * @param donators
+     */
     @Override
     public void showDroidDonators(Robot receiver, List<Robot> donators) {
+        if (!donators.isEmpty()) {
+            donators.forEach((donator) -> {
+                System.out.println(donator.toString());
+            });
 
-        for (Robot donator : donators) {
-            System.out.println(donator.toString());
+            System.out.println("-----------------------------");
+            System.out.println("Parts donated");
+            System.out.println("-----------------------------");
+            System.out.println("Brain: " + receiver.getBrain().getValue() + " | Donator ID - " + receiver.getBrain().getKey());
+            System.out.println("Mobility: " + receiver.getMobility().getValue() + "| Donator ID - " + receiver.getMobility().getKey());
+            System.out.println("Vision: " + receiver.getVision().getValue() + "| Donator ID - " + receiver.getVision().getKey());
+            System.out.println("Arms: " + receiver.getArms().getValue() + " | Donator ID - " + receiver.getArms().getKey());
+            System.out.println("Media Center: " + receiver.getMediaCenter().getValue() + " | Donator ID - " + receiver.getMediaCenter().getKey());
+            System.out.println("Power Plant: " + receiver.getPowerPlant().getValue() + " | Donator ID - " + receiver.getPowerPlant().getKey());
+            System.out.println("-----------------------------");
+            System.out.print("Receiver model\n" + receiver.toString() + "");
+            System.out.print("\n");
+        } else {
+            System.out.print("Invalid model or doesn't exist.");
         }
-
-        System.out.println("-----------------------------");
-        System.out.println("Parts donated");
-        System.out.println("-----------------------------");
-        System.out.println("Brain: " + receiver.getBrain().getValue() + " | Donator ID - " + receiver.getBrain().getKey());
-        System.out.println("Mobility: " + receiver.getMobility().getValue() + "| Donator ID - " + receiver.getMobility().getKey());
-        System.out.println("Vision: " + receiver.getVision().getValue() + "| Donator ID - " + receiver.getVision().getKey());
-        System.out.println("Arms: " + receiver.getArms().getValue() + " | Donator ID - " + receiver.getArms().getKey());
-        System.out.println("Media Center: " + receiver.getMediaCenter().getValue() + " | Donator ID - " + receiver.getMediaCenter().getKey());
-        System.out.println("Power Plant: " + receiver.getPowerPlant().getValue() + " | Donator ID - " + receiver.getPowerPlant().getKey());
-        System.out.println("-----------------------------");
-        System.out.print("Receiver\n" + receiver.toString() + "");
-        System.out.print("\n");
-
+        bottomMenu();
     }
-
-    private void menuDonatedById() {
-        Scanner reader = new Scanner(System.in);
-        System.out.println("Tips: Go to option [1] or [2] to see serial number of Android v1 or Andoid v2");
-        System.out.println("Enter a serial number");
-        long id = reader.nextLong();
-        presenter.submitDonatorByModelId(id);
-    }
-
 }

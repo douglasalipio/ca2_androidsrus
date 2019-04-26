@@ -8,6 +8,7 @@ package mvp;
 import builder.RobotBuilder;
 import entity.Robot;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -90,17 +91,6 @@ public class DroidRusPresenter implements DroidsRusContract.BasePresenter {
     }
 
     /**
-     * Retrieving donor of a model by id.
-     *
-     * @param id
-     */
-    @Override
-    public void submitDonatorByModelId(long id) {
-        Robot receiver = findRobotById(id);
-        view.showDroidDonators(receiver, findDonorComponents(receiver));
-    }
-
-    /**
      * Retrieving all donors of an android
      *
      * @param receiver Android who wants to know his donors.
@@ -138,7 +128,7 @@ public class DroidRusPresenter implements DroidsRusContract.BasePresenter {
      * @return robot found.
      */
     private List<Robot> findRobotByModel(String model) {
-        return robots
+        return Arrays.asList(robotBuilder.allV2Androids())
                 .stream()
                 .filter((robot) -> (normalize(robot.getModel()).equals(normalize(model))))
                 .collect(Collectors.toList());
@@ -151,7 +141,7 @@ public class DroidRusPresenter implements DroidsRusContract.BasePresenter {
      * @return string normalized
      */
     private String normalize(String value) {
-        return value.toLowerCase();
+        return value.trim().toLowerCase();
     }
 
 }
