@@ -56,9 +56,7 @@ public class DroidRusPresenter implements DroidsRusContract.BasePresenter {
      */
     @Override
     public void submitRobotByModel(String model) {
-        if (robots != null) {
-            view.showRobotsByModel(findRobotByModel(model));
-        }
+        view.showRobotsByModel(findRobotByModel(model, robots));
 
     }
 
@@ -85,7 +83,8 @@ public class DroidRusPresenter implements DroidsRusContract.BasePresenter {
      */
     @Override
     public void submitAllDonorsByModel(String model) {
-        findRobotByModel(model).forEach((droidReceiver) -> {
+        var receivers = Arrays.asList(robotBuilder.allV2Androids());
+        findRobotByModel(model, receivers).forEach((droidReceiver) -> {
             view.showDroidDonators(droidReceiver, findDonorComponents(droidReceiver));
         });
     }
@@ -127,8 +126,8 @@ public class DroidRusPresenter implements DroidsRusContract.BasePresenter {
      * @param model find by model
      * @return robot found.
      */
-    private List<Robot> findRobotByModel(String model) {
-        return Arrays.asList(robotBuilder.allV2Androids())
+    private List<Robot> findRobotByModel(String model, List<Robot> robots) {
+        return robots
                 .stream()
                 .filter((robot) -> (normalize(robot.getModel()).equals(normalize(model))))
                 .collect(Collectors.toList());

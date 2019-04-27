@@ -173,7 +173,8 @@ public class DroidsRusUI implements DroidsRusContract.BaseView {
      */
     @Override
     public void showDroidDonators(Robot receiver, List<Robot> donators) {
-        if (!donators.isEmpty()) {
+        
+        if (donators != null && !donators.isEmpty()) {
             donators.forEach((donator) -> {
                 System.out.println(donator.toString());
             });
