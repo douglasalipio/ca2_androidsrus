@@ -97,27 +97,37 @@ public class DroidRusPresenter implements DroidsRusContract.BasePresenter {
      */
     private List<Robot> findDonorComponents(Robot receiver) {
         List<Robot> robotContainer = new ArrayList();
-        robotContainer.add(findRobotById(receiver.getBrain().getKey()));
-        robotContainer.add(findRobotById(receiver.getMobility().getKey()));
-        robotContainer.add(findRobotById(receiver.getVision().getKey()));
-        robotContainer.add(findRobotById(receiver.getArms().getKey()));
-        robotContainer.add(findRobotById(receiver.getMediaCenter().getKey()));
-        robotContainer.add(findRobotById(receiver.getPowerPlant().getKey()));
+        robotContainer.add(robots.get(findRobotById(receiver.getBrain().getKey())));
+        robotContainer.add(robots.get(findRobotById(receiver.getMobility().getKey())));
+        robotContainer.add(robots.get(findRobotById(receiver.getVision().getKey())));
+        robotContainer.add(robots.get(findRobotById(receiver.getArms().getKey())));
+        robotContainer.add(robots.get(findRobotById(receiver.getMediaCenter().getKey())));
+        robotContainer.add(robots.get(findRobotById(receiver.getPowerPlant().getKey())));
         return robotContainer;
     }
 
     /**
      * Retrieving android by id.
      *
-     * @param id the serial number of the android.
-     * @return robot found.
+     * @param key the serial number of the android.
+     * @return index in list.
      */
-    private Robot findRobotById(long id) {
-        return robots
-                .stream()
-                .filter((robot) -> (robot.getSerialNumber() == id))
-                .findAny()
-                .orElse(null);
+    public int findRobotById(long key) {
+        int index = Integer.MAX_VALUE;
+        int low = 0;
+        int high = robots.size();
+        while (low <= high) {
+            int mid = (low + high) / 2;
+            if (robots.get(mid).getSerialNumber() < key) {
+                low = mid + 1;
+            } else if (robots.get(mid).getSerialNumber() > key) {
+                high = mid - 1;
+            } else {
+                index = mid;
+                break;
+            }
+        }
+        return index;
     }
 
     /**

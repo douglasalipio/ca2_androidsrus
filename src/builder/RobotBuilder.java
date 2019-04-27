@@ -29,10 +29,20 @@ public class RobotBuilder {
         v2Bunch();
     }
 
+    /**
+     * Instance of robot object.
+     *
+     * @return
+     */
     public static RobotBuilder instance() {
         return INSTANCE;
     }
 
+    /**
+     * Generating first generation.
+     *
+     * @return
+     */
     private Robot[] v1Bunch() {
         v1Androids = new Robot[V1_BUNCH_SIZE];
         for (int i = 0; i < V1_BUNCH_SIZE; i++) {
@@ -49,6 +59,11 @@ public class RobotBuilder {
         return v1Androids;
     }
 
+    /**
+     * Generating second generation.
+     *
+     * @return
+     */
     private Robot[] v2Bunch() {
         v2Androids = new Robot[V2_BUNCH_SIZE];
         for (int i = 0; i < V2_BUNCH_SIZE; i++) {
@@ -65,6 +80,11 @@ public class RobotBuilder {
         return v2Androids;
     }
 
+    /**
+     * Embed brain component.
+     *
+     * @param newRobot
+     */
     private void embedBrainIn(Robot newRobot) {
         while (newRobot.getBrain() == null) {
             Robot donator = findDonator();
@@ -74,6 +94,11 @@ public class RobotBuilder {
         }
     }
 
+    /**
+     * Embed mobility component.
+     *
+     * @param newRobot
+     */
     private void embedMobilityIn(Robot newRobot) {
         while (newRobot.getMobility() == null) {
             Robot donator = findDonator();
@@ -83,6 +108,11 @@ public class RobotBuilder {
         }
     }
 
+    /**
+     * Embed a vision component.
+     *
+     * @param newRobot
+     */
     private void embedVisionIn(Robot newRobot) {
         while (newRobot.getVision() == null) {
             Robot donator = findDonator();
@@ -92,6 +122,12 @@ public class RobotBuilder {
         }
     }
 
+    /**
+     *
+     * Embed arms components.
+     *
+     * @param newRobot
+     */
     private void embedArmsIn(Robot newRobot) {
         while (newRobot.getArms() == null) {
             Robot donator = findDonator();
@@ -101,6 +137,11 @@ public class RobotBuilder {
         }
     }
 
+    /**
+     * Embed a media center component.
+     *
+     * @param newRobot
+     */
     private void embedMediaCenterIn(Robot newRobot) {
         while (newRobot.getMediaCenter() == null) {
             Robot donator = findDonator();
@@ -110,6 +151,11 @@ public class RobotBuilder {
         }
     }
 
+    /**
+     * Embed a power plant component.
+     *
+     * @param newRobot
+     */
     private void embedPowerPlantIn(Robot newRobot) {
         while (newRobot.getPowerPlant() == null) {
             Robot donator = findDonator();
