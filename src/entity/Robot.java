@@ -27,6 +27,17 @@ public class Robot {
         this.serialNumber = System.nanoTime();
     }
 
+    /**
+     * Creating robot.
+     *
+     * @param model
+     * @param brain
+     * @param mobility
+     * @param vision
+     * @param arms
+     * @param mediaCenter
+     * @param powerPlant
+     */
     public Robot(
             String model,
             String brain,
@@ -46,74 +57,164 @@ public class Robot {
         this.powerPlant = new MutablePair(serialNumber, powerPlant);
     }
 
+    /**
+     * Donating count.
+     *
+     * @return counter.
+     */
     public int getDonatorCount() {
         return donatorCount;
     }
 
+    /**
+     * Getting serial number.
+     *
+     * @return
+     */
     public long getSerialNumber() {
         return this.serialNumber;
     }
 
+    /**
+     * Checking if robot is a donator.
+     *
+     * @return
+     */
     public boolean isDonate() {
         return donatorCount <= 2;
     }
 
+    /**
+     * Getting model
+     *
+     * @return
+     */
     public String getModel() {
         return model;
     }
 
+    /**
+     * Getting brain.
+     *
+     * @return
+     */
     public MutablePair<Long, String> getBrain() {
         return brain;
     }
 
+    /**
+     * Getting mobility.
+     *
+     * @return
+     */
     public MutablePair<Long, String> getMobility() {
         return mobility;
     }
 
+    /**
+     * Getting vision.
+     *
+     * @return
+     */
     public MutablePair<Long, String> getVision() {
         return vision;
     }
 
+    /**
+     * Getting media center
+     *
+     * @return
+     */
     public MutablePair<Long, String> getMediaCenter() {
         return mediaCenter;
     }
 
+    /**
+     * Getting power plant.
+     *
+     * @return
+     */
     public MutablePair<Long, String> getPowerPlant() {
         return powerPlant;
     }
 
+    /**
+     * Getting arms.
+     *
+     * @return
+     */
     public MutablePair<Long, String> getArms() {
         return arms;
     }
 
+    /**
+     * Attaching model
+     *
+     * @param model
+     */
     public void attachModel(String model) {
         this.model = model;
     }
 
+    /**
+     * Attaching brain
+     *
+     * @param brain
+     */
     public void attachBrain(MutablePair<Long, String> brain) {
         this.brain = brain;
     }
 
+    /**
+     * Attaching mobility
+     *
+     * @param mobility
+     */
     public void attachMobility(MutablePair<Long, String> mobility) {
         this.mobility = mobility;
     }
 
+    /**
+     * Attaching vision
+     *
+     * @param vision
+     */
     public void attachVision(MutablePair<Long, String> vision) {
         this.vision = vision;
     }
 
+    /**
+     * Attaching arms
+     *
+     * @param arms
+     */
     public void attachArms(MutablePair<Long, String> arms) {
         this.arms = arms;
     }
 
+    /**
+     * Attaching media center
+     *
+     * @param mediaCenter
+     */
     public void attachMediaCenter(MutablePair<Long, String> mediaCenter) {
         this.mediaCenter = mediaCenter;
     }
 
+    /**
+     * Attaching power plant
+     *
+     * @param powerPlant
+     */
     public void attachPowerPlant(MutablePair<Long, String> powerPlant) {
         this.powerPlant = powerPlant;
     }
 
+    /**
+     * Donating brain
+     *
+     * @return
+     */
     public MutablePair<Long, String> donateBrain() {
         MutablePair<Long, String> part = new MutablePair(serialNumber, brain.getValue());
         donatorCount++;
@@ -121,6 +222,11 @@ public class Robot {
         return part;
     }
 
+    /**
+     * Donating powerPlant
+     *
+     * @return
+     */
     public MutablePair<Long, String> donatePowerPlant() {
         MutablePair<Long, String> part = new MutablePair(serialNumber, powerPlant.getValue());
         donatorCount++;
@@ -128,6 +234,11 @@ public class Robot {
         return part;
     }
 
+    /**
+     * Donating mobility
+     *
+     * @return
+     */
     public MutablePair<Long, String> donateMobility() {
         MutablePair<Long, String> part = new MutablePair(serialNumber, mobility.getValue());
         donatorCount++;
@@ -135,6 +246,11 @@ public class Robot {
         return part;
     }
 
+    /**
+     * Donating vision
+     *
+     * @return
+     */
     public MutablePair<Long, String> donateVision() {
         MutablePair<Long, String> part = new MutablePair(serialNumber, vision.getValue());
         donatorCount++;
@@ -142,6 +258,11 @@ public class Robot {
         return part;
     }
 
+    /**
+     * Donating arms
+     *
+     * @return
+     */
     public MutablePair<Long, String> donatehArms() {
         MutablePair<Long, String> part = new MutablePair(serialNumber, arms.getValue());
         donatorCount++;
@@ -149,6 +270,11 @@ public class Robot {
         return part;
     }
 
+    /**
+     * Donating media center
+     *
+     * @return
+     */
     public MutablePair<Long, String> donateMediaCenter() {
         MutablePair<Long, String> part = new MutablePair(serialNumber, mediaCenter.getValue());
         donatorCount++;
@@ -156,6 +282,11 @@ public class Robot {
         return part;
     }
 
+    /**
+     * Printing robot.
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return "-----------------------------\n"
@@ -169,15 +300,4 @@ public class Robot {
                 + "Power Plant: " + powerPlant.getValue() + "\n"
                 + "----------------------------";
     }
-
-    public enum Component {
-        BRAIN,
-        MOBILITY,
-        VISION,
-        ARMS,
-        MEDI_CENTER,
-        POWER_PLANT,
-        UNAVAILABLE
-    }
-
 }

@@ -66,14 +66,33 @@ public class DroidRusPresenter implements DroidsRusContract.BasePresenter {
      * @param model filter of the search.
      */
     @Override
-    public void submitTotalRobotByModel(String model) {
-        int totalCount = robots
+    public void submitTotalRobotByModel() {
+        int totalAndy = robots
                 .stream()
-                .filter((robot) -> (normalize(robot.getModel()).equals(normalize(model))))
+                .filter((robot) -> (robot.getModel().equals("Andy")))
                 .toArray().length;
 
-        view.showTotalRobots("Total count for " + model + " is " + totalCount);
+        int totalBetty = robots
+                .stream()
+                .filter((robot) -> (robot.getModel().equals("Betty")))
+                .toArray().length;
 
+        int totalBobi = robots
+                .stream()
+                .filter((robot) -> (robot.getModel().equals("Bobi")))
+                .toArray().length;
+
+        int totalFred = robots
+                .stream()
+                .filter((robot) -> (robot.getModel().equals("Fred")))
+                .toArray().length;
+
+        String label = "Total count Andy is " + totalAndy + "\n";
+        label += "Total count Betty is " + totalBetty + "\n";
+        label += "Total count Bobi is " + totalBobi + "\n";
+        label += "Total count Fred is " + totalFred + "\n";
+
+        view.showTotalRobots(label);
     }
 
     /**

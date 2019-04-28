@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
+ * Creating a list of robots.
  *
  * @author hal-9000
  */

@@ -17,16 +17,18 @@ import java.util.Random;
  */
 public class ToolsBuilder {
 
-    private Random random;
-    private static final ToolsBuilder instance = new ToolsBuilder();
+    private final Random random;
+    private static final ToolsBuilder INSTANCE = new ToolsBuilder();
 
     private ToolsBuilder() {
-
         this.random = new Random();
     }
 
     public static ToolsBuilder instance() {
-        return instance;
+        if (INSTANCE == null) {
+            return new ToolsBuilder();
+        }
+        return INSTANCE;
     }
 
     /**
@@ -116,7 +118,7 @@ public class ToolsBuilder {
      * @return
      */
     public String v2Model() {
-        String models[] = {"Andy ",
+        String models[] = {"Andy",
             "Betty",
             "Bobi",
             "Fred"};

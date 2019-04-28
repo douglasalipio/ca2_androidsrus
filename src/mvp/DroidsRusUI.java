@@ -38,12 +38,12 @@ public class DroidsRusUI implements DroidsRusContract.BaseView {
         System.out.println("**------------------------------------**");
         System.out.println("**------search features---------------**");
         System.out.println("**------------------------------------**");
-        System.out.println(" 1 - Print all android v1");
-        System.out.println(" 2 - Print all android v2");
-        System.out.println(" 3 - Search by model");
-        System.out.println(" 4 - Total count by model");
-        System.out.println(" 5 - Search all donators by model");
-        System.out.println(" 0 - Close app");
+        System.out.println(" (1) - Print all android v1");
+        System.out.println(" (2) - Print all android v2");
+        System.out.println(" (3) - Search by model");
+        System.out.println(" (4) - Total count by model");
+        System.out.println(" (5) - Search all donors by model");
+        System.out.println(" (0) - Close app");
 
         int option = reader.nextInt();
         switch (option) {
@@ -54,7 +54,7 @@ public class DroidsRusUI implements DroidsRusContract.BaseView {
                 presenter.submitV2Androids();
                 break;
             case 3:
-                menuTotalCountsByModel();
+                menuSearchByModel();
                 break;
             case 4:
                 menuTotalCounts();
@@ -67,7 +67,7 @@ public class DroidsRusUI implements DroidsRusContract.BaseView {
     }
 
     /**
-     * Asking for android donators model.
+     * Asking for android donors model.
      */
     private void menuDonated() {
         Scanner reader = new Scanner(System.in);
@@ -78,20 +78,16 @@ public class DroidsRusUI implements DroidsRusContract.BaseView {
     }
 
     /**
-     * Asking for total counts of available types to make the search.
+     * Submit total counts for second generation
      */
     private void menuTotalCounts() {
-        Scanner reader = new Scanner(System.in);
-        System.out.println("Eg: Andy, Betty, Android mk1, Android mk2, etc");
-        System.out.println("Enter a model");
-        String type = reader.nextLine();
-        presenter.submitTotalRobotByModel(type);
+        presenter.submitTotalRobotByModel();
     }
 
     /**
      * Asking for model to make the search.
      */
-    private void menuTotalCountsByModel() {
+    private void menuSearchByModel() {
         Scanner reader = new Scanner(System.in);
         System.out.println("Eg.: Andy, Betty, Android mk1, Android mk2, etc.");
         System.out.println("Enter a model");
@@ -150,7 +146,8 @@ public class DroidsRusUI implements DroidsRusContract.BaseView {
         for (Robot robot : robots) {
             System.out.println(robot.toString());
         }
-        bottomMenu();
+        showMainMenu();
+
     }
 
     /**
@@ -173,7 +170,7 @@ public class DroidsRusUI implements DroidsRusContract.BaseView {
      */
     @Override
     public void showDroidDonators(Robot receiver, List<Robot> donators) {
-        
+
         if (donators != null && !donators.isEmpty()) {
             donators.forEach((donator) -> {
                 System.out.println(donator.toString());
@@ -194,6 +191,6 @@ public class DroidsRusUI implements DroidsRusContract.BaseView {
         } else {
             System.out.print("Invalid model or doesn't exist.");
         }
-        bottomMenu();
+        showMainMenu();
     }
 }

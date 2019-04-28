@@ -10,6 +10,8 @@ import java.util.List;
 
 /**
  *
+ * Interface for droids.
+ *
  * @author hal-9000
  */
 public interface DroidsRusContract {
@@ -38,7 +40,7 @@ public interface DroidsRusContract {
 
         public void submitRobotByModel(String model);
 
-        public void submitTotalRobotByModel(String model);
+        public void submitTotalRobotByModel();
 
         public void submitAllDonorsByModel(String model);
     }
