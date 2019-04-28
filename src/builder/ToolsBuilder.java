@@ -5,7 +5,12 @@ package builder;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import entity.Component;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+import org.apache.commons.lang3.mutable.Mutable;
+import org.apache.commons.lang3.tuple.MutablePair;
 
 /**
  *
@@ -122,6 +127,17 @@ public class ToolsBuilder {
             "Fred"};
         int modelsIndex = random.nextInt(models.length);
         return models[modelsIndex];
+    }
+
+    public List<MutablePair<Long, Component>> buildDefaultComponents(long serialNumber) {
+        List<MutablePair<Long, Component>> components = new ArrayList();
+        components.add(new MutablePair(serialNumber, new Component(arms(), Component.Type.BRAIN)));
+        components.add(new MutablePair(serialNumber, new Component(arms(), Component.Type.ARMS)));
+        components.add(new MutablePair(serialNumber, new Component(arms(), Component.Type.MOBILITY)));
+        components.add(new MutablePair(serialNumber, new Component(arms(), Component.Type.VISION)));
+        components.add(new MutablePair(serialNumber, new Component(arms(), Component.Type.POWER_PLANT)));
+        components.add(new MutablePair(serialNumber, new Component(arms(), Component.Type.MEDIA_CENTER)));
+        return components;
     }
 
 }

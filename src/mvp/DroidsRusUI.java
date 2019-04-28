@@ -5,9 +5,11 @@
  */
 package mvp;
 
+import entity.Component;
 import entity.Robot;
 import java.util.List;
 import java.util.Scanner;
+import org.apache.commons.lang3.tuple.MutablePair;
 
 /**
  * The App screen.
@@ -172,12 +174,9 @@ public class DroidsRusUI implements DroidsRusContract.BaseView {
             System.out.println("-----------------------------");
             System.out.println("Parts donated");
             System.out.println("-----------------------------");
-            System.out.println("Brain: " + receiver.getBrain().getValue() + " | Donator ID - " + receiver.getBrain().getKey());
-            System.out.println("Mobility: " + receiver.getMobility().getValue() + "| Donator ID - " + receiver.getMobility().getKey());
-            System.out.println("Vision: " + receiver.getVision().getValue() + "| Donator ID - " + receiver.getVision().getKey());
-            System.out.println("Arms: " + receiver.getArms().getValue() + " | Donator ID - " + receiver.getArms().getKey());
-            System.out.println("Media Center: " + receiver.getMediaCenter().getValue() + " | Donator ID - " + receiver.getMediaCenter().getKey());
-            System.out.println("Power Plant: " + receiver.getPowerPlant().getValue() + " | Donator ID - " + receiver.getPowerPlant().getKey());
+            receiver.getComponents().forEach((mapComp) -> {
+                System.err.println("" + mapComp.getValue().getLabel() + " - " + mapComp.getValue().getValue() + " - " + mapComp.getKey());
+            });
             System.out.println("-----------------------------");
             System.out.print("Receiver model\n" + receiver.toString() + "");
             System.out.print("\n");

@@ -5,11 +5,13 @@
  */
 package builder;
 
+import entity.Component;
 import java.util.Random;
 import entity.Robot;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.apache.commons.lang3.tuple.MutablePair;
 
 /**
  * Creating a list of robots.
@@ -53,13 +55,8 @@ public class RobotBuilder {
     private Robot[] v1Bunch() {
         v1Androids = new Robot[V1_BUNCH_SIZE];
         for (int i = 0; i < V1_BUNCH_SIZE; i++) {
-            Robot robot = new Robot(toolsBuilder.v1Model(),
-                    toolsBuilder.brain(),
-                    toolsBuilder.mobility(),
-                    toolsBuilder.vision(),
-                    toolsBuilder.arms(),
-                    toolsBuilder.mediaCenter(),
-                    toolsBuilder.powerPlant());
+            Robot robot = new Robot(toolsBuilder.v1Model());
+            robot.attachComponent(toolsBuilder.buildDefaultComponents(robot.getSerialNumber()));
             v1Androids[i] = robot;
         }
 
@@ -74,15 +71,8 @@ public class RobotBuilder {
     private Robot[] v2Bunch() {
         v2Androids = new Robot[V2_BUNCH_SIZE];
         for (int i = 0; i < V2_BUNCH_SIZE; i++) {
-            Robot v2Robot = new Robot();
-            v2Robot.attachModel(toolsBuilder.v2Model());
-            embedBrainIn(v2Robot);
-            embedMobilityIn(v2Robot);
-            embedVisionIn(v2Robot);
-            embedArmsIn(v2Robot);
-            embedMediaCenterIn(v2Robot);
-            embedPowerPlantIn(v2Robot);
-            v2Androids[i] = v2Robot;
+            Robot v2Robot = new Robot(toolsBuilder.v2Model());
+            v2Androids[i] = embedComponents(v2Robot, Component.list());
         }
         return v2Androids;
     }
@@ -92,83 +82,13 @@ public class RobotBuilder {
      *
      * @param newRobot
      */
-    private void embedBrainIn(Robot newRobot) {
-        while (newRobot.getBrain() == null) {
-            Robot donator = findDonator();
-            if (!donator.getBrain().getValue().isBlank()) {
-                newRobot.attachBrain(donator.donateBrain());
-            }
+    private Robot embedComponents(Robot newRobot, List<Component.Type> types) {
+        for (Component.Type type : types) {
+            Robot robot = findDonator(type);
+            var component = robot.donateComponent(type);
+            newRobot.attachComponent(component);
         }
-    }
-
-    /**
-     * Embed mobility component.
-     *
-     * @param newRobot
-     */
-    private void embedMobilityIn(Robot newRobot) {
-        while (newRobot.getMobility() == null) {
-            Robot donator = findDonator();
-            if (!donator.getMobility().getValue().isBlank()) {
-                newRobot.attachMobility(donator.donateMobility());
-            }
-        }
-    }
-
-    /**
-     * Embed a vision component.
-     *
-     * @param newRobot
-     */
-    private void embedVisionIn(Robot newRobot) {
-        while (newRobot.getVision() == null) {
-            Robot donator = findDonator();
-            if (!donator.getVision().getValue().isBlank()) {
-                newRobot.attachVision(donator.donateVision());
-            }
-        }
-    }
-
-    /**
-     * Embed arms components.
-     *
-     * @param newRobot
-     */
-    private void embedArmsIn(Robot newRobot) {
-        while (newRobot.getArms() == null) {
-            Robot donator = findDonator();
-            if (!donator.getArms().getValue().isBlank()) {
-                newRobot.attachArms(donator.donatehArms());
-            }
-        }
-    }
-
-    /**
-     * Embed a media center component.
-     *
-     * @param newRobot
-     */
-    private void embedMediaCenterIn(Robot newRobot) {
-        while (newRobot.getMediaCenter() == null) {
-            Robot donator = findDonator();
-            if (!donator.getMediaCenter().getValue().isBlank()) {
-                newRobot.attachMediaCenter(donator.donateMediaCenter());
-            }
-        }
-    }
-
-    /**
-     * Embed a power plant component.
-     *
-     * @param newRobot
-     */
-    private void embedPowerPlantIn(Robot newRobot) {
-        while (newRobot.getPowerPlant() == null) {
-            Robot donator = findDonator();
-            if (!donator.getPowerPlant().getValue().isBlank()) {
-                newRobot.attachPowerPlant(donator.donatePowerPlant());
-            }
-        }
+        return newRobot;
     }
 
     /**
@@ -176,10 +96,16 @@ public class RobotBuilder {
      *
      * @return donator
      */
-    private Robot findDonator() {
+    private Robot findDonator(Component.Type type) {
         Robot v1Android = v1Androids[sortIndex()];
-        if (!v1Android.isDonate()) {
-            findDonator();
+        var component = v1Android.getComponents()
+                .stream()
+                .filter(it -> it.getValue().getType() == type)
+                .findAny()
+                .orElse(null);
+
+        if (!v1Android.isDonate() && component != null) {
+            findDonator(type);
         }
         return v1Android;
     }

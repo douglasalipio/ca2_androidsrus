@@ -6,11 +6,13 @@
 package mvp;
 
 import builder.RobotBuilder;
+import entity.Component;
 import entity.Robot;
 import java.util.ArrayList;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import org.apache.commons.lang3.tuple.MutablePair;
 
 /**
  * Controlling the logic of DroidsRus.
@@ -117,12 +119,10 @@ public class DroidRusPresenter implements DroidsRusContract.BasePresenter {
      */
     private List<Robot> findDonorComponents(Robot receiver) {
         List<Robot> robotContainer = new ArrayList();
-        robotContainer.add(robots.get(findRobotById(receiver.getBrain().getKey())));
-        robotContainer.add(robots.get(findRobotById(receiver.getMobility().getKey())));
-        robotContainer.add(robots.get(findRobotById(receiver.getVision().getKey())));
-        robotContainer.add(robots.get(findRobotById(receiver.getArms().getKey())));
-        robotContainer.add(robots.get(findRobotById(receiver.getMediaCenter().getKey())));
-        robotContainer.add(robots.get(findRobotById(receiver.getPowerPlant().getKey())));
+
+        for (MutablePair<Long, Component> mapComp : receiver.getComponents()) {
+            robotContainer.add(robots.get(findRobotById(mapComp.getKey())));
+        }
         return robotContainer;
     }
 
@@ -149,7 +149,6 @@ public class DroidRusPresenter implements DroidsRusContract.BasePresenter {
         }
         return index;
     }
-  
 
     /**
      * Retrieving android by model.
