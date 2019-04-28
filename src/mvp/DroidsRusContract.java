@@ -42,7 +42,7 @@ public interface DroidsRusContract {
 
         public void submitTotalRobotByModel();
 
-        public void submitAllDonorsByModel(String model);
+        public void submitAllDonorsByModel(long id);
     }
 
 }

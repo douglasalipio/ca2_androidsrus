@@ -63,7 +63,6 @@ public class DroidRusPresenter implements DroidsRusContract.BasePresenter {
     /**
      * Retrieving the number of androids in stock by model.
      *
-     * @param model filter of the search.
      */
     @Override
     public void submitTotalRobotByModel() {
@@ -98,14 +97,16 @@ public class DroidRusPresenter implements DroidsRusContract.BasePresenter {
     /**
      * Retrieving all donors of all models.
      *
-     * @param model filter of the search.
+     * @param id serial .
      */
     @Override
-    public void submitAllDonorsByModel(String model) {
-        var receivers = Arrays.asList(robotBuilder.allV2Androids());
-        findRobotByModel(model, receivers).forEach((droidReceiver) -> {
-            view.showDroidDonators(droidReceiver, findDonorComponents(droidReceiver));
-        });
+    public void submitAllDonorsByModel(long id) {
+        var robotId = findRobotById(id);
+        if (robotId != -1) {
+            var receiver = robots.get(robotId);
+            view.showDroidDonators(receiver, findDonorComponents(receiver));
+        }
+
     }
 
     /**
@@ -132,7 +133,7 @@ public class DroidRusPresenter implements DroidsRusContract.BasePresenter {
      * @return index in list.
      */
     public int findRobotById(long key) {
-        int index = Integer.MAX_VALUE;
+        int index = -1;
         int low = 0;
         int high = robots.size();
         while (low <= high) {

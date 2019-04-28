@@ -31,18 +31,11 @@ public class DroidsRusUI implements DroidsRusContract.BaseView {
      */
     public void showMainMenu() {
         Scanner reader = new Scanner(System.in);
-        System.out.println("**--DroidsRus App---------------------**");
-        System.out.println("**------------------------------------**");
-        System.out.println("**------------------------------------**");
-        System.out.println("**------------------------------------**");
-        System.out.println("**------------------------------------**");
-        System.out.println("**------search features---------------**");
-        System.out.println("**------------------------------------**");
         System.out.println(" (1) - Print all android v1");
         System.out.println(" (2) - Print all android v2");
         System.out.println(" (3) - Search by model");
         System.out.println(" (4) - Total count by model");
-        System.out.println(" (5) - Search all donors by model");
+        System.out.println(" (5) - Search donor by ID");
         System.out.println(" (0) - Close app");
 
         int option = reader.nextInt();
@@ -71,10 +64,10 @@ public class DroidsRusUI implements DroidsRusContract.BaseView {
      */
     private void menuDonated() {
         Scanner reader = new Scanner(System.in);
-        System.out.println("Eg: Andy, Betty, Fred, Bobi");
-        System.out.println("Enter a model");
-        String model = reader.nextLine();
-        presenter.submitAllDonorsByModel(model);
+        System.out.println("Go to option [2] to see serial numbers.");
+        System.out.println("Enter a serial");
+        long id = reader.nextLong();
+        presenter.submitAllDonorsByModel(id);
     }
 
     /**
