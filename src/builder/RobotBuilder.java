@@ -18,13 +18,16 @@ import java.util.List;
  */
 public class RobotBuilder {
 
-    private static final RobotBuilder INSTANCE = new RobotBuilder();
+    private static RobotBuilder INSTANCE;
     private static final int V1_BUNCH_SIZE = 600;
     private static final int V2_BUNCH_SIZE = 400;
     private final ToolsBuilder toolsBuilder = ToolsBuilder.instance();
     private Robot[] v1Androids = null;
     private Robot[] v2Androids = null;
 
+    /**
+     * Building both generations for the first time.
+     */
     private RobotBuilder() {
         v1Bunch();
         v2Bunch();
@@ -36,11 +39,14 @@ public class RobotBuilder {
      * @return
      */
     public static RobotBuilder instance() {
+        if (INSTANCE == null) {
+            return new RobotBuilder();
+        }
         return INSTANCE;
     }
 
     /**
-     * Generating first generation.
+     * Building first generation.
      *
      * @return
      */
@@ -61,7 +67,7 @@ public class RobotBuilder {
     }
 
     /**
-     * Generating second generation.
+     * Building second generation.
      *
      * @return
      */
@@ -124,7 +130,6 @@ public class RobotBuilder {
     }
 
     /**
-     *
      * Embed arms components.
      *
      * @param newRobot
@@ -167,7 +172,7 @@ public class RobotBuilder {
     }
 
     /**
-     * Try to found a donator only robots v1.
+     * Trying to found a donator only robots v1.
      *
      * @return donator
      */
@@ -180,7 +185,7 @@ public class RobotBuilder {
     }
 
     /**
-     * Generating a random index between 0 to size list.
+     * Building a random index between 0 to size list.
      *
      * @param value size of list
      * @return number
@@ -207,6 +212,11 @@ public class RobotBuilder {
         return v1Androids;
     }
 
+    /**
+     * Sorting androids v1 and androids v2 in a list.
+     *
+     * @return
+     */
     public List<Robot> allAndroids() {
         List<Robot> androids = new ArrayList();
         androids.addAll(Arrays.asList(v1Androids));

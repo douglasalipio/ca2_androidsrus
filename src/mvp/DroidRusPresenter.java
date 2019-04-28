@@ -8,7 +8,7 @@ package mvp;
 import builder.RobotBuilder;
 import entity.Robot;
 import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -100,7 +100,7 @@ public class DroidRusPresenter implements DroidsRusContract.BasePresenter {
      * @param id serial .
      */
     @Override
-    public void submitAllDonorsByModel(long id) {
+    public void submitDonorById(long id) {
         var robotId = findRobotById(id);
         if (robotId != -1) {
             var receiver = robots.get(robotId);
@@ -149,6 +149,7 @@ public class DroidRusPresenter implements DroidsRusContract.BasePresenter {
         }
         return index;
     }
+  
 
     /**
      * Retrieving android by model.

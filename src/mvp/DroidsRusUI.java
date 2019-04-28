@@ -67,7 +67,7 @@ public class DroidsRusUI implements DroidsRusContract.BaseView {
         System.out.println("Go to option [2] to see serial numbers.");
         System.out.println("Enter a serial");
         long id = reader.nextLong();
-        presenter.submitAllDonorsByModel(id);
+        presenter.submitDonorById(id);
     }
 
     /**
@@ -152,7 +152,7 @@ public class DroidsRusUI implements DroidsRusContract.BaseView {
     @Override
     public void showTotalRobots(String model) {
         System.out.println(model);
-        bottomMenu();
+        showMainMenu();
     }
 
     /**

@@ -8,6 +8,7 @@ package entity;
 import org.apache.commons.lang3.tuple.MutablePair;
 
 /**
+ * Provide a way to create robot.
  *
  * @author hal-9000
  */
@@ -23,6 +24,9 @@ public class Robot {
     private MutablePair<Long, String> powerPlant;
     private int donatorCount;
 
+    /**
+     * Creating a robot instance.
+     */
     public Robot() {
         this.serialNumber = System.nanoTime();
     }
@@ -58,162 +62,126 @@ public class Robot {
     }
 
     /**
-     * Donating count.
-     *
-     * @return counter.
+     * @return Donating count.
      */
     public int getDonatorCount() {
         return donatorCount;
     }
 
     /**
-     * Getting serial number.
-     *
-     * @return
+     * @return Getting serial number.
      */
     public long getSerialNumber() {
         return this.serialNumber;
     }
 
     /**
-     * Checking if robot is a donator.
-     *
-     * @return
+     * @return Checking if robot is a donator.
      */
     public boolean isDonate() {
         return donatorCount <= 2;
     }
 
     /**
-     * Getting model
-     *
-     * @return
+     * @return Getting model
      */
     public String getModel() {
         return model;
     }
 
     /**
-     * Getting brain.
-     *
-     * @return
+     * @return Getting brain.
      */
     public MutablePair<Long, String> getBrain() {
         return brain;
     }
 
     /**
-     * Getting mobility.
-     *
-     * @return
+     * @return Getting mobility.
      */
     public MutablePair<Long, String> getMobility() {
         return mobility;
     }
 
     /**
-     * Getting vision.
-     *
-     * @return
+     * @return Getting vision.
      */
     public MutablePair<Long, String> getVision() {
         return vision;
     }
 
     /**
-     * Getting media center
-     *
-     * @return
+     * @return Getting media center
      */
     public MutablePair<Long, String> getMediaCenter() {
         return mediaCenter;
     }
 
     /**
-     * Getting power plant.
-     *
-     * @return
+     * @return Getting power plant.
      */
     public MutablePair<Long, String> getPowerPlant() {
         return powerPlant;
     }
 
     /**
-     * Getting arms.
-     *
-     * @return
+     * @return Getting arms.
      */
     public MutablePair<Long, String> getArms() {
         return arms;
     }
 
     /**
-     * Attaching model
-     *
-     * @param model
+     * @param model Attaching model
      */
     public void attachModel(String model) {
         this.model = model;
     }
 
     /**
-     * Attaching brain
-     *
-     * @param brain
+     * @param brain Attaching brain
      */
     public void attachBrain(MutablePair<Long, String> brain) {
         this.brain = brain;
     }
 
     /**
-     * Attaching mobility
-     *
-     * @param mobility
+     * @param mobility Attaching mobility
      */
     public void attachMobility(MutablePair<Long, String> mobility) {
         this.mobility = mobility;
     }
 
     /**
-     * Attaching vision
-     *
-     * @param vision
+     * @param vision Attaching vision
      */
     public void attachVision(MutablePair<Long, String> vision) {
         this.vision = vision;
     }
 
     /**
-     * Attaching arms
-     *
-     * @param arms
+     * @param arms Attaching arms
      */
     public void attachArms(MutablePair<Long, String> arms) {
         this.arms = arms;
     }
 
     /**
-     * Attaching media center
-     *
-     * @param mediaCenter
+     * @param mediaCenter Attaching media center
      */
     public void attachMediaCenter(MutablePair<Long, String> mediaCenter) {
         this.mediaCenter = mediaCenter;
     }
 
     /**
-     * Attaching power plant
-     *
-     * @param powerPlant
+     * @param powerPlant Attaching power plant
      */
     public void attachPowerPlant(MutablePair<Long, String> powerPlant) {
         this.powerPlant = powerPlant;
     }
 
     /**
-     * Donating brain
-     *
-     * @return
+     * @return Donating brain
      */
     public MutablePair<Long, String> donateBrain() {
         MutablePair<Long, String> part = new MutablePair(serialNumber, brain.getValue());
@@ -223,9 +191,7 @@ public class Robot {
     }
 
     /**
-     * Donating powerPlant
-     *
-     * @return
+     * @return Donating powerPlant
      */
     public MutablePair<Long, String> donatePowerPlant() {
         MutablePair<Long, String> part = new MutablePair(serialNumber, powerPlant.getValue());
@@ -235,9 +201,7 @@ public class Robot {
     }
 
     /**
-     * Donating mobility
-     *
-     * @return
+     * @return Donating mobility
      */
     public MutablePair<Long, String> donateMobility() {
         MutablePair<Long, String> part = new MutablePair(serialNumber, mobility.getValue());
@@ -247,9 +211,7 @@ public class Robot {
     }
 
     /**
-     * Donating vision
-     *
-     * @return
+     * @return Donating vision
      */
     public MutablePair<Long, String> donateVision() {
         MutablePair<Long, String> part = new MutablePair(serialNumber, vision.getValue());
@@ -259,9 +221,7 @@ public class Robot {
     }
 
     /**
-     * Donating arms
-     *
-     * @return
+     * @return Donating arms
      */
     public MutablePair<Long, String> donatehArms() {
         MutablePair<Long, String> part = new MutablePair(serialNumber, arms.getValue());
@@ -271,9 +231,7 @@ public class Robot {
     }
 
     /**
-     * Donating media center
-     *
-     * @return
+     * @return Donating media center
      */
     public MutablePair<Long, String> donateMediaCenter() {
         MutablePair<Long, String> part = new MutablePair(serialNumber, mediaCenter.getValue());
@@ -283,9 +241,7 @@ public class Robot {
     }
 
     /**
-     * Printing robot.
-     *
-     * @return
+     * @return Printing robot.
      */
     @Override
     public String toString() {
