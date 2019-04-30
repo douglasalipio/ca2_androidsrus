@@ -183,60 +183,64 @@ public class Robot {
     /**
      * @return Donating brain
      */
-    public MutablePair<Long, String> donateBrain() {
+    public MutablePair<Long, String> donateBrain(long id) {
         MutablePair<Long, String> part = new MutablePair(serialNumber, brain.getValue());
         donatorCount++;
-        this.brain.setValue("");
+        this.brain.setValue("donated " + id);
         return part;
     }
 
     /**
      * @return Donating powerPlant
      */
-    public MutablePair<Long, String> donatePowerPlant() {
+    public MutablePair<Long, String> donatePowerPlant(long id) {
         MutablePair<Long, String> part = new MutablePair(serialNumber, powerPlant.getValue());
         donatorCount++;
-        this.powerPlant.setValue("");
+        this.powerPlant.setValue("donated " + id);
         return part;
     }
 
     /**
+     * @param id of new robot
      * @return Donating mobility
      */
-    public MutablePair<Long, String> donateMobility() {
+    public MutablePair<Long, String> donateMobility(long id) {
         MutablePair<Long, String> part = new MutablePair(serialNumber, mobility.getValue());
         donatorCount++;
-        this.mobility.setValue("");
+        this.mobility.setValue("donated " + id);
         return part;
     }
 
     /**
+     * @param id of new robot
      * @return Donating vision
      */
-    public MutablePair<Long, String> donateVision() {
+    public MutablePair<Long, String> donateVision(long id) {
         MutablePair<Long, String> part = new MutablePair(serialNumber, vision.getValue());
         donatorCount++;
-        this.vision.setValue("");
+        this.vision.setValue("donated " + id);
         return part;
     }
 
     /**
+     * @param id of new robot
      * @return Donating arms
      */
-    public MutablePair<Long, String> donatehArms() {
+    public MutablePair<Long, String> donatehArms(long id) {
         MutablePair<Long, String> part = new MutablePair(serialNumber, arms.getValue());
         donatorCount++;
-        this.arms.setValue("");
+        this.arms.setValue("donated " + id);
         return part;
     }
 
     /**
+     * @param id of new robot
      * @return Donating media center
      */
-    public MutablePair<Long, String> donateMediaCenter() {
+    public MutablePair<Long, String> donateMediaCenter(long id) {
         MutablePair<Long, String> part = new MutablePair(serialNumber, mediaCenter.getValue());
         donatorCount++;
-        this.mediaCenter.setValue("");
+        this.mediaCenter.setValue("donated " + id);
         return part;
     }
 

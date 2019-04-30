@@ -25,7 +25,6 @@ public class RobotBuilder {
     private Robot[] v1Androids = null;
     private Robot[] v2Androids = null;
 
-    
     /**
      * Building first generation.
      *
@@ -77,7 +76,8 @@ public class RobotBuilder {
         while (newRobot.getBrain() == null) {
             Robot donator = findDonator();
             if (!donator.getBrain().getValue().isBlank()) {
-                newRobot.attachBrain(donator.donateBrain());
+                newRobot.attachBrain(donator
+                        .donateBrain(newRobot.getSerialNumber()));
             }
         }
     }
@@ -91,7 +91,8 @@ public class RobotBuilder {
         while (newRobot.getMobility() == null) {
             Robot donator = findDonator();
             if (!donator.getMobility().getValue().isBlank()) {
-                newRobot.attachMobility(donator.donateMobility());
+                newRobot.attachMobility(donator
+                        .donateMobility(newRobot.getSerialNumber()));
             }
         }
     }
@@ -105,7 +106,8 @@ public class RobotBuilder {
         while (newRobot.getVision() == null) {
             Robot donator = findDonator();
             if (!donator.getVision().getValue().isBlank()) {
-                newRobot.attachVision(donator.donateVision());
+                newRobot.attachVision(donator
+                        .donateVision(newRobot.getSerialNumber()));
             }
         }
     }
@@ -119,7 +121,8 @@ public class RobotBuilder {
         while (newRobot.getArms() == null) {
             Robot donator = findDonator();
             if (!donator.getArms().getValue().isBlank()) {
-                newRobot.attachArms(donator.donatehArms());
+                newRobot.attachArms(donator
+                        .donatehArms(newRobot.getSerialNumber()));
             }
         }
     }
@@ -133,7 +136,8 @@ public class RobotBuilder {
         while (newRobot.getMediaCenter() == null) {
             Robot donator = findDonator();
             if (!donator.getMediaCenter().getValue().isBlank()) {
-                newRobot.attachMediaCenter(donator.donateMediaCenter());
+                newRobot.attachMediaCenter(donator
+                        .donateMediaCenter(newRobot.getSerialNumber()));
             }
         }
     }
@@ -147,7 +151,8 @@ public class RobotBuilder {
         while (newRobot.getPowerPlant() == null) {
             Robot donator = findDonator();
             if (!donator.getPowerPlant().getValue().isBlank()) {
-                newRobot.attachPowerPlant(donator.donatePowerPlant());
+                newRobot.attachPowerPlant(donator
+                        .donatePowerPlant(newRobot.getSerialNumber()));
             }
         }
     }
