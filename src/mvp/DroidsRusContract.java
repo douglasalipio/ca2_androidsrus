@@ -57,6 +57,8 @@ public interface DroidsRusContract {
          */
         public void showDroidDonators(Robot receiver, List<Robot> donators);
 
+        public void isFirstGeneration(boolean b);
+
     }
 
     public interface BasePresenter {
@@ -97,6 +99,9 @@ public interface DroidsRusContract {
          * @param id serial number
          */
         public void submitDonorById(long id);
+
+        public void submitBuildFirstVersion();
+
     }
 
 }

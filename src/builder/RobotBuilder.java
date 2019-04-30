@@ -25,32 +25,13 @@ public class RobotBuilder {
     private Robot[] v1Androids = null;
     private Robot[] v2Androids = null;
 
-    /**
-     * Building both generations for the first time.
-     */
-    private RobotBuilder() {
-        v1Bunch();
-        v2Bunch();
-    }
-
-    /**
-     * Instance of robot object.
-     *
-     * @return
-     */
-    public static RobotBuilder instance() {
-        if (INSTANCE == null) {
-            return new RobotBuilder();
-        }
-        return INSTANCE;
-    }
-
+    
     /**
      * Building first generation.
      *
      * @return
      */
-    private Robot[] v1Bunch() {
+    public Robot[] v1Bunch() {
         v1Androids = new Robot[V1_BUNCH_SIZE];
         for (int i = 0; i < V1_BUNCH_SIZE; i++) {
             Robot robot = new Robot(toolsBuilder.v1Model(),
@@ -71,7 +52,7 @@ public class RobotBuilder {
      *
      * @return
      */
-    private Robot[] v2Bunch() {
+    public Robot[] v2Bunch() {
         v2Androids = new Robot[V2_BUNCH_SIZE];
         for (int i = 0; i < V2_BUNCH_SIZE; i++) {
             Robot v2Robot = new Robot();

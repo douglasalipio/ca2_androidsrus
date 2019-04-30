@@ -19,9 +19,9 @@ import java.util.stream.Collectors;
  */
 public class DroidRusPresenter implements DroidsRusContract.BasePresenter {
 
-    private final RobotBuilder robotBuilder = RobotBuilder.instance();
+    private final RobotBuilder robotBuilder = new RobotBuilder();
     private DroidsRusContract.BaseView view;
-    private final List<Robot> robots = robotBuilder.allAndroids();
+    private List<Robot> robots;
 
     /**
      * Dependency injection from view.
@@ -46,7 +46,7 @@ public class DroidRusPresenter implements DroidsRusContract.BasePresenter {
      */
     @Override
     public void submitV2Androids() {
-        view.showAllAndroidV2(robotBuilder.allV2Androids());
+        view.showAllAndroidV2(robotBuilder.v2Bunch());
     }
 
     /**
@@ -149,7 +149,6 @@ public class DroidRusPresenter implements DroidsRusContract.BasePresenter {
         }
         return index;
     }
-  
 
     /**
      * Retrieving android by model.
@@ -172,6 +171,16 @@ public class DroidRusPresenter implements DroidsRusContract.BasePresenter {
      */
     private String normalize(String value) {
         return value.trim().toLowerCase();
+    }
+
+    @Override
+    public void submitBuildFirstVersion() {
+        robotBuilder.v1Bunch();
+        if (robotBuilder.v1Bunch() != null) {
+            view.isFirstGeneration(true);
+        } else {
+            view.isFirstGeneration(false);
+        }
     }
 
 }

@@ -17,6 +17,7 @@ import java.util.Scanner;
 public class DroidsRusUI implements DroidsRusContract.BaseView {
 
     private final DroidsRusContract.BasePresenter presenter = new DroidRusPresenter();
+    private boolean hasGeneratedV1 = false;
 
     /**
      * Creating the APP UI.
@@ -31,30 +32,42 @@ public class DroidsRusUI implements DroidsRusContract.BaseView {
      */
     public void showMainMenu() {
         Scanner reader = new Scanner(System.in);
-        System.out.println(" (1) - Print all android v1");
-        System.out.println(" (2) - Print all android v2");
-        System.out.println(" (3) - Search by model");
-        System.out.println(" (4) - Total count by model");
-        System.out.println(" (5) - Search donor by ID");
+        System.out.println(" (1) - Generate first version");
+        System.out.println(" (2) - Print all android v1");
+        System.out.println(" (3) - Print all android v2");
+        System.out.println(" (4) - Search by model");
+        System.out.println(" (5) - Total count by model");
+        System.out.println(" (6) - Search donor by ID");
         System.out.println(" (0) - Close app");
 
         int option = reader.nextInt();
-        switch (option) {
-            case 1:
-                presenter.submitV1Androids();
-                break;
-            case 2:
-                presenter.submitV2Androids();
-                break;
-            case 3:
-                menuSearchByModel();
-                break;
-            case 4:
-                menuTotalCounts();
-                break;
-            case 5:
-                menuDonated();
-                break;
+
+        if (option == 1 && !hasGeneratedV1) {
+
+            presenter.submitBuildFirstVersion();
+
+        } else if (option != 1 && hasGeneratedV1) {
+
+            switch (option) {
+                case 2:
+                    presenter.submitV1Androids();
+                    break;
+                case 3:
+                    presenter.submitV2Androids();
+                    break;
+                case 4:
+                    menuSearchByModel();
+                    break;
+                case 5:
+                    menuTotalCounts();
+                    break;
+                case 6:
+                    menuDonated();
+                    break;
+            }
+        } else {
+            System.err.println("Please, generate first version!!");
+            showMainMenu();
         }
 
     }
@@ -184,6 +197,13 @@ public class DroidsRusUI implements DroidsRusContract.BaseView {
         } else {
             System.out.print("Invalid model or doesn't exist.");
         }
+        showMainMenu();
+    }
+
+    @Override
+    public void isFirstGeneration(boolean b) {
+        hasGeneratedV1 = b;
+        System.err.print("Generated successfuly\n");
         showMainMenu();
     }
 }
